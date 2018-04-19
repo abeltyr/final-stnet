@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-//use Auth;
+use Auth;
 use File;
 use App\Admin;
 use Image;
@@ -16,10 +16,38 @@ class AdminsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    public function adminSignin(Request $request)
+	{
+		$this->validate($request, [
+			'email' => 'required',
+			'password' => 'required|min:8',
+			'pin' => 'required|min:4|max:4'
+		]);
+		if (Auth::guard('admin')->attempt(['email'=> $request['email'], 'password' => $request['password'], 'pin' => $request['pin'] ])){
+            return redirect()->route('viewadmin');
+		}
+
+    }
+    //for the above redirect
+	public function viewadmin(){
+        return view ('home', array('user' => Auth::guard('admin')->user() ) );
+    }
+    //logout 
+	public function Logout(){
+		Auth::logout();
+        return view('welcome');
+    }
+    
     public function index()
     {
-        //
-        return view('welcome');
+
+        if(Auth::guest()){
+            return view('welcome');
+        }
+        elseif(Auth::guard('admin')->user()){
+            return redirect()->route('viewadmin');
+        }
     }
 
     /**
@@ -77,14 +105,13 @@ class AdminsController extends Controller
 				$admin->avatar = 'admin/'.$filename;
 			} 
         }
-        else{
-            echo 'hello';
-        }
 		$admin->email = $email;
         $admin->phone = $phone;
-		$adds = Admin::all(); 
+        $admin->user_id = '15876356';
+        $adds = Admin::all(); 
+        
         foreach($adds as $add){ 
-            if (($add->id) == 0){
+            if (($add->id) < 1 ){
                 //$admin->user_id = '15876356';
             }
             else{
@@ -95,7 +122,10 @@ class AdminsController extends Controller
 		$admin->pin = $pin;
         $admin->password = $password;
         $admin->remember_token = $token;
-		$admin->save();
+		Auth::login($admin);
+        $admin->save();
+        return redirect()->route('viewadmin');
+        
     }
 
     /**
@@ -142,4 +172,5 @@ class AdminsController extends Controller
     {
         //
     }
+    //admin signing in 
 }

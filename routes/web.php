@@ -11,10 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[
+    'uses' => 'AdminsController@index',
+    'as' => 'well',
+]);
 
 Route::resources([
 'Admin' => 'AdminsController'
+]);
+
+Route::POST('/stnet/admin/login',[
+    'uses' => 'AdminsController@adminSignin',
+    'as' => 'adminSignin',
+]);
+
+Route::GET('/stnet/admin',[
+    'uses' => 'AdminsController@viewadmin',
+    'as' => 'viewadmin',
+]);
+
+Route::get('/logout',[
+    'uses' => 'AdminsController@Logout',
+    'as' => 'Logout',
 ]);

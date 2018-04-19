@@ -7,13 +7,14 @@ use Illuminate\Foundation\Auth\User as Aut;
 class Admin extends Aut
 {
    
-   protected $fillable = [
-       'fname','lname', 'email', 'phone',
-   ];
+    protected $guard = 'admin';
 
-   
-   protected $hidden = [
-       'password', 'remember_token',
-   ];
+    protected $fillable = [
+        'fname','lname', 'email', 'phone',
+    ];
+ 
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 
 }
