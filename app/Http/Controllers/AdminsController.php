@@ -25,7 +25,6 @@ class AdminsController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -39,6 +38,51 @@ class AdminsController extends Controller
         
         // save the data of the admins to the admins table
         //initialize the Admin class
+
+        //requests
+        $avatar = $request->file('avatar');
+		$first_name = $request['fname'];
+		$last_name = $request['lname'];
+		$email = $request['email'];
+		$phone = $request['phone'];
+        $token = $request['_token'];
+		$pin = $request['pin'];
+        $password = bcrypt($request['password']);
+
+        //Vallidation 
+		$this->validate($request, [
+			'fname' => 'required|max:120|Alpha',
+			'lname' => 'required|max:120|Alpha',
+			'email' => 'email|unique:admin',
+			'phone' => 'required|unique:admin|max:9|min:9', 
+			'pin' => 'required|max:4|min:4',             
+			'password' => 'required|min:8|confirmed',
+			'avatar' => 'mimes:jpeg,jpg,png | max:10000',
+        ]);
+        //adding to database
+
+        $admin = new admin();
+		$admin->firstname = $first_name;
+        $admin->lastname = $last_name; 
+        
+        // adding image to database 
+		if ($request-> hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+			Image::make($avatar)->resize(2000, 2000) ->save(public_path('/uploads/employ/'.$filename));
+			if($admin){
+				$admin->avatar = $filename;
+			} 
+        }
+		$admin->email = $email;
+        $admin->phone = $phone;
+        $admin->user_id = '15876356';
+		$admin->role_id = '1';
+		$admin->pin = $pin;
+        $admin->password = $password;
+        $admin->remember_token = $token;
+		$admin->save();
+        return view('welcome');
     }
 
     /**
