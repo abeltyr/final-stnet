@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Admin;
 
 class AdminsController extends Controller
 {
@@ -35,8 +36,9 @@ class AdminsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        echo "hello";
+        
+        // save the data of the admins to the admins table
+        //initialize the Admin class
     }
 
     /**
