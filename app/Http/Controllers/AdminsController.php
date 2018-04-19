@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\http\Requests;
 use App\Admin;
 use Image;
-use File;
+use file;
 
 class AdminsController extends Controller
 {
@@ -42,8 +43,7 @@ class AdminsController extends Controller
         //initialize the Admin class
 
         //requests
-        $avatar = $request->file('avatar');
-        dd($avatar);
+        $avatar = $request->avatar;
         $first_name = $request['fname'];
         $last_name = $request['lname'];
         $email = $request['email'];
@@ -72,7 +72,7 @@ class AdminsController extends Controller
 
         // adding image to database
         $filename = time(). '.' .$avatar->getClientOriginalExtension();
-        Image::make($avatar)->resize(3000,3000)->save( public_path('/uploads/avatar'. $filename ) );
+        Image::make($avatar)->resize(3000,3000)->save( public_path('/uploads/admins'. $filename ) );
         $admin ->avatar = $filename;
         $admin->email = $email;
         $admin->phone = $phone;

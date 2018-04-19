@@ -8,7 +8,7 @@ class Admin extends Aut
 {
     //
     protected $fillable = [
-        'firstname','lastname', 'email', 'password','phone'
+        'firstname','lastname', 'email', 'password','phone','avatar',
     ];
 
     protected $hidden = [
