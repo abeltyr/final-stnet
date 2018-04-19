@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+//use Auth;
+use File;
 use App\Admin;
+use Image;
 
 class AdminsController extends Controller
 {
@@ -35,7 +39,6 @@ class AdminsController extends Controller
      */
     public function store(Request $request)
     {
-        
         // save the data of the admins to the admins table
         //initialize the Admin class
 
@@ -69,14 +72,25 @@ class AdminsController extends Controller
 		if ($request-> hasFile('avatar')){
             $avatar = $request->file('avatar');
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
-			Image::make($avatar)->resize(2000, 2000) ->save(public_path('/uploads/employ/'.$filename));
+			Image::make($avatar)->resize(2000, 2000) ->save(public_path('/uploads/admin/'.$filename));
 			if($admin){
-				$admin->avatar = $filename;
+				$admin->avatar = 'admin/'.$filename;
 			} 
+        }
+        else{
+            echo 'hello';
         }
 		$admin->email = $email;
         $admin->phone = $phone;
-        $admin->user_id = '15876356';
+		$adds = Admin::all(); 
+        foreach($adds as $add){ 
+            if (($add->id) == 0){
+                //$admin->user_id = '15876356';
+            }
+            else{
+                $admin->user_id = ($add->user_id) + '1';
+            }
+        }	
 		$admin->role_id = '1';
 		$admin->pin = $pin;
         $admin->password = $password;

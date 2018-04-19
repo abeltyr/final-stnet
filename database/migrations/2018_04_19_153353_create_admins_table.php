@@ -15,7 +15,7 @@ class CreateAdminsTable extends Migration
     {
         Schema::create('admin', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('firtname');
+            $table->string('firstname');
             $table->string('lastname');
             $table->string('avatar')->default('/admin/avatar/avatar.jpg');
             $table->integer('role_id')->default('0');
