@@ -14,7 +14,7 @@ class AdminsController extends Controller
     public function index()
     {
         //
-        return view('');
+        return view('welcome');
     }
 
     /**
@@ -36,6 +36,7 @@ class AdminsController extends Controller
     public function store(Request $request)
     {
         //
+        echo "hello";
     }
 
     /**
