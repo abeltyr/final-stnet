@@ -32,7 +32,7 @@
         @endif 
         <div class="container" style="padding:50px" >
 
-                <form action="Admin.store" method="POST">
+                <form action="Admin" method="POST">
                     {{ csrf_field() }}
                     <div class="form-group form-group-default col-md-6">
                         <input type="file" class="col-md-10  col-md-offset-1 col-sm-10 col-sm-offset-2 col-xs-12 col-xs-offset-0 btn btn-primary" style="margin-top:10px;" name="avatar">

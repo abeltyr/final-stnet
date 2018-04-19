@@ -57,11 +57,11 @@ class AdminsController extends Controller
 			'phone' => 'required|unique:admin|max:9|min:9', 
 			'pin' => 'required|max:4|min:4',             
 			'password' => 'required|min:8|confirmed',
-			'avatar' => 'mimes:jpeg,jpg,png | max:10000',
+			'avatar' => 'max:10000',
         ]);
         //adding to database
 
-        $admin = new admin();
+        $admin = new Admin();
 		$admin->firstname = $first_name;
         $admin->lastname = $last_name; 
         
@@ -82,7 +82,6 @@ class AdminsController extends Controller
         $admin->password = $password;
         $admin->remember_token = $token;
 		$admin->save();
-        return view('welcome');
     }
 
     /**
