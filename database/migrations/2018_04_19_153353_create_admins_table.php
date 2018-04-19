@@ -13,9 +13,9 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('admin', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('firtname');
+            $table->string('firstname');
             $table->string('lastname');
             $table->string('avatar')->default('/admin/avatar/avatar.jpg');
             $table->integer('role_id')->default(0);
@@ -24,7 +24,6 @@ class CreateAdminsTable extends Migration
             $table->integer('phone')->unique();
             $table->string('password');
             $table->integer('pin');
-            $table->string('firtname');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -37,6 +36,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('admin');
     }
 }
