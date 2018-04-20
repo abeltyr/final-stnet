@@ -17,17 +17,17 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = 'admin')
     {
-        if (Auth::guard($guard)->check()) {
+        /*if (Auth::guard($guard)->guest()) {
             if($request->ajax()){
                 return response('Unauthorized.', 401);
             }
-            elseif(Auth::guest()){
+            else{
                 return redirect()->route('well');
             }
         }
         elseif(Auth::guard($guard)->user()){
             return redirect()->route('viewadmin');
-        }
+        }*/
 
         return $next($request);
     }
