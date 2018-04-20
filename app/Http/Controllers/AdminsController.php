@@ -36,7 +36,7 @@ class AdminsController extends Controller
     //logout 
 	public function Logout(){
 		Auth::logout();
-        return view('welcome');
+        return redirect()->route('well');
     }
     
     public function index()
