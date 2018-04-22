@@ -46,7 +46,7 @@
             <div class="clearfix">
                 <div class="col-sm-12 col-md-10 col-md-offset-2">
                     <div class="logo-title-container">
-                        <img class="img-responsive pull-left logo hidden-xs animated fadeIn" src="/uploads/admin/default.jpg" alt="Logo Icon">
+                        <img class="img-responsive pull-left logo hidden-xs animated fadeIn" src="/uploads/admin/default2.jpg" alt="Logo Icon" >
                         <div class="copy animated fadeIn">
                             <h1>Schoolnet</h1>
                             <p></p>
@@ -60,7 +60,7 @@
             
             <div class="login-container">
                 
-                <p>Log-In</p>
+                <p style=" text-transform: uppercase; font-size:20px;">Log-In</p>
 
                 <form action="{{ route('adminSignin') }}" method="POST">
                     {{ csrf_field() }}
