@@ -35,18 +35,18 @@ class AdminsController extends Controller
     }
     //logout 
 	public function Logout(){
-		Auth::logout();
+		Auth::guard('admin')->logout();
         return redirect()->route('well');
     }
     
     public function index()
     {
 
-        if(Auth::guest()){
-            return view('welcome');
-        }
-        elseif(Auth::guard('admin')->user()){
+        if(Auth::guard('admin')->check()){
             return redirect()->route('viewadmin');
+        }
+        elseif(Auth::guest()){
+            return view('stnet.welcome');
         }
     }
 

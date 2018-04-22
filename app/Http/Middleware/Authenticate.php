@@ -15,9 +15,9 @@ class Authenticate
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = 'admin')
+    public function handle($request, Closure $next, $guard = null)
     {
-        /*if (Auth::guard($guard)->guest()) {
+        /*if(Auth::guard($guard)->guest()){
             if($request->ajax()){
                 return response('Unauthorized.', 401);
             }
@@ -25,10 +25,7 @@ class Authenticate
                 return redirect()->route('well');
             }
         }
-        elseif(Auth::guard($guard)->user()){
-            return redirect()->route('viewadmin');
-        }*/
-
+*/
         return $next($request);
     }
 }
