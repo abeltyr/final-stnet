@@ -9,14 +9,11 @@ class Admin extends Aut
    
     protected $guard = 'admin';
 
-    //protected $redirectTo = '/';
-
     protected $fillable = [
-        'fname','lname', 'email', 'phone',
+        'firstname','lastname', 'email', 'password','phone','avatar',
     ];
- 
+
     protected $hidden = [
         'password', 'remember_token',
     ];
-
 }
