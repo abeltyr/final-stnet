@@ -94,7 +94,7 @@
 
 
 
-                <form action="" method="POST">
+                <form action="{{ route('adminSignin') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="form-group form-group-default {{ $errors->has('email') ? ' has-error' : '' }}" id="emailGroup">
                         <label>E-Mail</label>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use App\http\Requests;
 use App\Admin;
 use Image;
@@ -15,10 +16,38 @@ class AdminsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    public function adminSignin(Request $request)
+	{
+		$this->validate($request, [
+			'email' => 'required',
+			'password' => 'required|min:8',
+			'pin' => 'required|min:4|max:4'
+		]);
+		if (Auth::guard('admin')->attempt(['email'=> $request['email'], 'password' => $request['password'], 'pin' => $request['pin'] ])){
+            return redirect()->route('viewadmin');
+		}
+
+    }
+    //for the above redirect
+	public function viewadmin(){
+        return view ('stnet.home', array('user' => Auth::guard('admin')->user() ) );
+    }
+    //logout 
+	public function Logout(){
+		Auth::guard('admin')->logout();
+        return redirect()->route('well');
+    }
+    
     public function index()
     {
-        //
-        return view('welcome');
+
+        if(Auth::guard('admin')->check()){
+            return redirect()->route('viewadmin');
+        }
+        elseif(Auth::guest()){
+            return view('stnet.welcome');
+        }
     }
 
     /**
@@ -28,7 +57,6 @@ class AdminsController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -43,46 +71,61 @@ class AdminsController extends Controller
         //initialize the Admin class
 
         //requests
-        $avatar = $request->avatar;
-        $first_name = $request['fname'];
-        $last_name = $request['lname'];
-        $email = $request['email'];
-        $phone = $request['phone'];
+        $avatar = $request->file('avatar');
+		$first_name = $request['fname'];
+		$last_name = $request['lname'];
+		$email = $request['email'];
+		$phone = $request['phone'];
         $token = $request['_token'];
-        $pin = $request['pin'];
+		$pin = $request['pin'];
         $password = bcrypt($request['password']);
 
-        //Vallidation
-        $this->validate($request, [
-            'fname' => 'required|max:120|Alpha',
-            'lname' => 'required|max:120|Alpha',
-            'email' => 'email|unique:admin',
-            'phone' => 'required|unique:admin|max:9|min:9',
-            'pin' => 'required|max:4|min:4',
-            'password' => 'required|min:8confirmed',
-            'avatar' => 'max:10000',
+        //Vallidation 
+		$this->validate($request, [
+			'fname' => 'required|max:120|Alpha',
+			'lname' => 'required|max:120|Alpha',
+			'email' => 'email|unique:admin',
+			'phone' => 'required|unique:admin|max:9|min:9', 
+			'pin' => 'required|max:4|min:4',             
+			'password' => 'required|min:8|confirmed',
+			'avatar' => 'max:10000',
         ]);
         //adding to database
 
         $admin = new Admin();
-        $admin->firstname = $first_name;
-        $admin->lastname = $last_name;
-
-
-
-        // adding image to database
-        $filename = time(). '.' .$avatar->getClientOriginalExtension();
-        Image::make($avatar)->resize(3000,3000)->save( public_path('/uploads/admins'. $filename ) );
-        $admin ->avatar = $filename;
-        $admin->email = $email;
+		$admin->firstname = $first_name;
+        $admin->lastname = $last_name; 
+        
+        // adding image to database 
+		if ($request-> hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+			Image::make($avatar)->resize(2000, 2000) ->save(public_path('/uploads/admin/'.$filename));
+			if($admin){
+				$admin->avatar = 'admin/'.$filename;
+			} 
+        }
+		$admin->email = $email;
         $admin->phone = $phone;
         $admin->user_id = '15876356';
-        $admin->role_id = '1';
-        $admin->pin = $pin;
+        $adds = Admin::all(); 
+        
+        foreach($adds as $add){ 
+            if (($add->id) < 1 ){
+                //$admin->user_id = '15876356';
+            }
+            else{
+                $admin->user_id = ($add->user_id) + '1';
+            }
+        }	
+		$admin->role_id = '1';
+		$admin->pin = $pin;
         $admin->password = $password;
         $admin->remember_token = $token;
+		Auth::login($admin);
         $admin->save();
-
+        return redirect()->route('viewadmin');
+        
     }
 
     /**
@@ -129,4 +172,5 @@ class AdminsController extends Controller
     {
         //
     }
+    //admin signing in 
 }
