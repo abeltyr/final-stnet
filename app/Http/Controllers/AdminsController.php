@@ -31,7 +31,7 @@ class AdminsController extends Controller
     }
     //for the above redirect
 	public function viewadmin(){
-        return view ('home', array('user' => Auth::guard('admin')->user() ) );
+        return view ('stnet.home', array('user' => Auth::guard('admin')->user() ) );
     }
     //logout 
 	public function Logout(){
