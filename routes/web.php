@@ -10,35 +10,32 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['middleware' => ['web']], function (){
-    Route::get('/',[
-        'uses' => 'AdminsController@index',
-        'as' => 'well',
-    ]);
+Route::get('/',function(){
+    return view('welcome');
+}
+);
 
+Route::prefix('Admin')->group(function (){
+    
     Route::resources([
-    'Admin' => 'AdminsController'
+    '/' => 'AdminsController'
     ]);
-
-    Route::POST('/stnet/admin/login',[
+    Route::POST('/AdminLoging',[
         'uses' => 'AdminsController@adminSignin',
         'as' => 'adminSignin',
-        'middleware' => 'auth.admin'
     ]);
-
-    Route::GET('/stnet/admin',[
+    Route::GET('/Admin',[
         'uses' => 'AdminsController@viewadmin',
         'as' => 'viewadmin',
-        'middleware' => 'auth.admin'
     ]);
-    Route::Post('/logout',[
+    Route::Post('/logingout',[
         'uses' => 'AdminsController@Logout',
         'as' => 'Logout',
     ]);
 
-    Route::POST('/admin/signup',[
+    Route::POST('/Admin/signup',[
         'uses' => 'AdminsController@store',
         'as' => 'adminStore',
-        'middleware' => 'auth.admin'
     ]);
+
 });
