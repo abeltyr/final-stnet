@@ -24,18 +24,9 @@ Route::prefix('Admin')->group(function (){
         'uses' => 'AdminsController@adminSignin',
         'as' => 'adminSignin',
     ]);
-    Route::GET('/',[
-        'uses' => 'AdminsController@viewadmin',
-        'as' => 'viewadmin',
-    ]);
     Route::Post('/logingout',[
         'uses' => 'AdminsController@Logout',
         'as' => 'Logout',
-    ]);
-
-    Route::POST('/Admin/signup',[
-        'uses' => 'AdminsController@store',
-        'as' => 'adminStore',
     ]);
     Route::resources([
        '/School'=>'SchoolController'

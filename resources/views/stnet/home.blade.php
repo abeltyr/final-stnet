@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                 
-                <form action="{{route('adminStore')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{url('Admin')}}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group form-group-default col-md-6">
                         <input type="file" class="col-md-10  col-md-offset-1 col-sm-10 col-sm-offset-2 col-xs-12 col-xs-offset-0 btn btn-primary" style="margin-top:10px;" name="avatar">
@@ -35,7 +35,7 @@
                     <div class="form-group form-group-default {{ $errors->has('phone') ? ' has-error' : '' }}" id="phoneGroup">
                         <label>phone</label>
                         <div class="controls">
-                            <input type="number" name="phone" id="phone" value="{{ old('phone') }}" placeholder="phone" class="form-control" required>
+                            <input type="tel" name="phone" id="phone" value="{{ old('phone') }}" placeholder="phone" class="form-control" required>
                          </div>
                     </div>
 

@@ -9,17 +9,15 @@ use App\Admin;
 use Image;
 use file;
 
-
 class AdminsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      * 
      */
-    
-    protected $redicrectTo= '/stnet/admin';
     public function adminSignin(Request $request)
 	{
 		$this->validate($request, [
@@ -28,26 +26,29 @@ class AdminsController extends Controller
 			'pin' => 'required|min:4|max:4'
 		]);
 		if (Auth::guard('admin')->attempt(['email'=> $request['email'], 'password' => $request['password'], 'pin' => $request['pin'] ])){
-            return redirect()->route('viewadmin');
+            return redirect(url('Admin'));
 		}
 
     }
     //for the above redirect
-	public function viewadmin(){
-        return view ('stnet.home', array('user' => Auth::guard('admin')->user() ) );
-
-    }
     //logout 
 	public function Logout(){
-		Auth::guard('admin')->logout();
-        return redirect()->route('well');
+        if(Auth::guard('admin')->check())
+        {
+            Auth::guard('admin')->logout();
+            return redirect(url('Admin'));
+        }
+        else
+        {
+        return redirect()->back();
+        }
     }
     
     public function index()
     {
 
         if(Auth::guard('admin')->check()){
-            return redirect()->route('viewadmin');
+            return view('stnet.home');
         }
         elseif(Auth::guest()){
             return view('stnet.welcome');
@@ -88,8 +89,8 @@ class AdminsController extends Controller
 		$this->validate($request, [
 			'fname' => 'required|max:120|Alpha',
 			'lname' => 'required|max:120|Alpha',
-			'email' => 'email|unique:admin',
-			'phone' => 'required|unique:admin|max:9|min:9', 
+			'email' => 'email|unique:admins',
+			'phone' => 'required|unique:admins|max:9|min:9',
 			'pin' => 'required|max:4|min:4',             
 			'password' => 'required|min:8|confirmed',
 			'avatar' => 'max:10000',
@@ -102,7 +103,6 @@ class AdminsController extends Controller
         
         // adding image to database 
 		if ($request-> hasFile('avatar')){
-            $avatar = $request->file('avatar');
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
 			Image::make($avatar)->resize(2000, 2000) ->save(public_path('/uploads/admin/'.$filename));
 			if($admin){
@@ -128,7 +128,7 @@ class AdminsController extends Controller
         $admin->remember_token = $token;
 		Auth::login($admin);
         $admin->save();
-        return redirect()->route('viewadmin');
+        return redirect()->back()->withSuccess("registered successfully");
         
     }
 
