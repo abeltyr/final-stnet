@@ -9,14 +9,17 @@ use App\Admin;
 use Image;
 use file;
 
+
 class AdminsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 
      */
     
+    protected $redicrectTo= '/stnet/admin';
     public function adminSignin(Request $request)
 	{
 		$this->validate($request, [
@@ -32,6 +35,7 @@ class AdminsController extends Controller
     //for the above redirect
 	public function viewadmin(){
         return view ('stnet.home', array('user' => Auth::guard('admin')->user() ) );
+
     }
     //logout 
 	public function Logout(){
