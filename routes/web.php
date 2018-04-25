@@ -24,7 +24,7 @@ Route::prefix('Admin')->group(function (){
         'uses' => 'AdminsController@adminSignin',
         'as' => 'adminSignin',
     ]);
-    Route::GET('/Admin',[
+    Route::GET('/',[
         'uses' => 'AdminsController@viewadmin',
         'as' => 'viewadmin',
     ]);
@@ -36,6 +36,9 @@ Route::prefix('Admin')->group(function (){
     Route::POST('/Admin/signup',[
         'uses' => 'AdminsController@store',
         'as' => 'adminStore',
+    ]);
+    Route::resources([
+       '/School'=>'SchoolController'
     ]);
 
 });
