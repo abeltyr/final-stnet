@@ -111,9 +111,15 @@ class AdminsController extends Controller
         }
 		$admin->email = $email;
         $admin->phone = $phone;
-        $admin->user_id = '15876356';
         $adds = Admin::all(); 
-        
+        if ($adds->isEmpty()) {
+            $userid = rand(10000,99999);
+            $admin->user_id = $userid.'1';
+        } else {
+            foreach($adds as $add) {
+                $admin->user_id = ($add->user_id) + '1';
+            }
+        }
         foreach($adds as $add){ 
             if (($add->id) < 1 ){
                 //$admin->user_id = '15876356';
@@ -122,7 +128,7 @@ class AdminsController extends Controller
                 $admin->user_id = ($add->user_id) + '1';
             }
         }	
-		$admin->role_id = '1';
+		$admin->role_id = '0';
 		$admin->pin = $pin;
         $admin->password = $password;
         $admin->remember_token = $token;

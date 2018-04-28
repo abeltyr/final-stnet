@@ -86,10 +86,10 @@ class SchoolController extends Controller
         // adding image to database 
 		if ($request-> hasFile('logo')){
             $filename = time(). '.' .$logo->getClientOriginalExtension();
-            Image::make($logo)->resize(2000,2000)->save( public_path('/uploads/schools/logo'. $filename ) );
+            Image::make($logo)->resize(2000,2000)->save( public_path('/uploads/schools/logo/'. $filename ) );
             
 			if($school){
-				$school->logo = 'schools/'.$filename;
+				$school->logo = 'schools/logo/'.$filename;
 			} 
         }
         $passwo = str_random(8) ;
@@ -106,7 +106,7 @@ class SchoolController extends Controller
         $school->school_owner = $owner;
         $school->subscibtion = '1';
         $school->subscibtion_type = $sub_type;
-        
+
         Mail::to($email)->send(new Schooladmin($password));
         $school->save();
         return json_encode($school);
