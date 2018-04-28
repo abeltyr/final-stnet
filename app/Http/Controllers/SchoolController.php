@@ -7,6 +7,8 @@ use App\School;
 use App\http\Requests;
 use Image;
 use file;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Schooladmin;
 
 class SchoolController extends Controller
 {
@@ -91,6 +93,7 @@ class SchoolController extends Controller
 			} 
         }
         $passwo = str_random(8) ;
+        $password = $passwo;
         $bypass = bcrypt($passwo);
         $school->representative = $rep;
         $school->email = $email;
@@ -103,6 +106,7 @@ class SchoolController extends Controller
         $school->school_owner = $owner;
         $school->subscibtion = '1';
         $school->subscibtion_type = $sub_type;
+        Mail::to($email)->send(new Schooladmin($password));
         $school->save();
         return json_encode($school);
 
