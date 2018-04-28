@@ -106,6 +106,7 @@ class SchoolController extends Controller
         $school->school_owner = $owner;
         $school->subscibtion = '1';
         $school->subscibtion_type = $sub_type;
+        
         Mail::to($email)->send(new Schooladmin($password));
         $school->save();
         return json_encode($school);

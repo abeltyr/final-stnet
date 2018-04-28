@@ -29,8 +29,7 @@ class Schooladmin extends Mailable
      */
     public function build()
     {
-        return $this
-            ->from('schoolnet@ednet.com')
+        return $this->from('schoolnet@ednet.com')
             ->view('email')
             ->with(['password' => $this->password]);
     }
