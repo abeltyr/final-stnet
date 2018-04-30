@@ -28,6 +28,9 @@ class AdminsController extends Controller
 		if (Auth::guard('admin')->attempt(['email'=> $request['email'], 'password' => $request['password'], 'pin' => $request['pin'] ])){
             return redirect(url('Admin'));
 		}
+		else{
+		    return redirect()->back()->withErrors('Either the email or the password is not correct');
+        }
 
     }
     //for the above redirect

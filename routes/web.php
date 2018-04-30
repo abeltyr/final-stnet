@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +33,13 @@ Route::prefix('Admin')->group(function (){
     ]);
 
 });
+Route::group(['prefix'=>'{SchoolName}'],function (){
+    Route::get('/Admin',[
+        'uses' => 'SchoolAdminController@index',
+    ]);
+    Route::resources([
+       'staff' => "StaffsController"
+    ]);
+
+});
+
