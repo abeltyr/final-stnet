@@ -17,7 +17,7 @@ class CreateSchoolsTable extends Migration
             $table->increments('id');
             $table->string('school_code')->unique();
             $table->string('name')->unique();
-            $table->string('logo')->default('/school/default.jpg');
+            $table->string('logo')->default('/schools/default.jpg');
             $table->string('representative');
             $table->string('email')->unique();
             $table->string('password');

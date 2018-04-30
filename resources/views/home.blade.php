@@ -14,13 +14,13 @@
                     <div class="form-group form-group-default col-md-6">
                         <input type="file" class="col-md-10  col-md-offset-1 col-sm-10 col-sm-offset-2 col-xs-12 col-xs-offset-0 btn btn-primary" style="margin-top:10px;" name="avatar">
                     </div>
-                    <div class="form-group form-group-default {{ $errors->has('email') ? ' has-error' : '' }}" id="emailGroup">
+                    <div class="form-group form-group-default {{ $errors->has('fname') ? ' has-error' : '' }}" id="emailGroup">
                         <label>First name</label>
                         <div class="controls">
                             <input type="text" name="fname" id="fname" value="{{ old('fname') }}" placeholder="First name" class="form-control" required>
                          </div>
                     </div>
-                    <div class="form-group form-group-default {{ $errors->has('email') ? ' has-error' : '' }}" id="emailGroup">
+                    <div class="form-group form-group-default {{ $errors->has('lname') ? ' has-error' : '' }}" id="emailGroup">
                         <label>Last name</label>
                         <div class="controls">
                             <input type="text" name="lname" id="lname" value="{{ old('lname') }}" placeholder="Last name" class="form-control" required>
