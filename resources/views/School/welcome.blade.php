@@ -62,7 +62,7 @@
                 
                 <p style=" text-transform: uppercase; font-size:20px;">Log-In</p>
 
-                <form action="{{ route('adminSignin') }}" method="POST">
+                <form action="{{ route('schadminlogin') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="form-group form-group-default {{ $errors->has('email') ? ' has-error' : '' }}" id="emailGroup">
                         <label>E-Mail</label>
