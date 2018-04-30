@@ -85,7 +85,7 @@
                     </div>
                     <div class="mdc-form-field col-md-12 col-md-offset-1">
                         <div class="mdc-checkbox">
-                            <input input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} id="my-checkbox" class="mdc-checkbox__native-control"/>
+                            <input  type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} value="1" id="my-checkbox" class="mdc-checkbox__native-control"/>
                             <div class="mdc-checkbox__background">
                                 <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
                                     <path class="mdc-checkbox__checkmark-path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
