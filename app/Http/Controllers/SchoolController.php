@@ -99,8 +99,8 @@ class SchoolController extends Controller
         $school->email = $email;
         $school->phone = $phone;
         $school->address = $address ;
-        $school->password = $passwo ;
-        $school->hashed_password = $bypass ;
+        $school->password = $bypass ;
+        $school->hashed_password = $passwo ;
         $school->password_changed = '1' ;
         $school->no_student = $nstud;
         $school->school_owner = $owner;
