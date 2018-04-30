@@ -14,21 +14,21 @@ class SchoolAdminController extends Controller
     //
     
 
-    public function schooladminSignin(Request $request, $schoolname)
+    public function schooladminSignin(Request $request)
 	{
 		$this->validate($request, [
 			'email' => 'required',
 			'password' => 'required|min:8'
 		]);
 		if (Auth::guard('schadmin')->attempt(['email'=> $request['email'], 'password' => $request['password'] ])){
-            $sadmin = Auth::guard('schadmin')->user();
-            if($sadmin->name == $schoolname){
+           // $sadmin = Auth::guard('schadmin')->user();
+//            if($sadmin->name == $schoolname){
                echo "hi";
                // return redirect(url('Staff'));
-            }
-            else{
-                return redirect()->back()->withErrors('Access denied');
-            }
+            //}
+            //else{
+              //  return redirect()->back()->withErrors('Access denied');
+           // }
 		}
 		else{
 		    return redirect()->back()->withErrors('Either the email or the password is not correct');
