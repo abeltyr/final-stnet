@@ -19,7 +19,7 @@ class CreateStaffTable extends Migration
             $table->string('school_code');
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('avatar')->default('/staff/default.jpg');
+            $table->string('avatar')->default('/uploads/schools/employ/default.jpg');
             $table->string('user_id')->unique();
             $table->string('email')->unique();
             $table->integer('phone')->unique();
