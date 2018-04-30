@@ -29,6 +29,7 @@ class CreateSchoolsTable extends Migration
             $table->string('school_owner');
             $table->integer('subscibtion');
             $table->integer('subscibtion_type');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

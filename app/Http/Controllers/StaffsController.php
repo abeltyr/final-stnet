@@ -49,8 +49,10 @@ class StaffsController extends Controller
         //loging out for staff
         if(Auth::guard('schstaff')->check())
         {
+            $admin = Auth::guard('schstaff')->user();
+            $var = $admin->school_name;
             Auth::guard('schstaff')->logout();
-            return redirect()->route('schoolstaffSignin');
+            return redirect(url($var.'/Staff'));
         }
         else
         {
@@ -101,8 +103,8 @@ class StaffsController extends Controller
 		$this->validate($request, [
 			'fname' => 'required|max:120',
 			'lname' => 'required|max:120',
-			'email' => 'email|unique:Staffs',
-			'phone' => 'required|unique:Staffs|max:9|min:9', 
+			'email' => 'email|unique:staffs',
+			'phone' => 'required|unique:staffs|max:9|min:9',
 			'password' => 'required|min:8|confirmed',
 			'photo' => 'mimes:jpeg,jpg,png | max:10000',
         ]);
@@ -113,7 +115,6 @@ class StaffsController extends Controller
 		$user->firstname = $first_name;
 		$user->lastname = $last_name; 
 		if ($request-> hasFile('photo')){
-            $photo = $request->file('photo');
             $filename = time() . '.' . $photo->getClientOriginalExtension();
 			Image::make($photo)->resize(500, 500) ->save(public_path('/uploads/schools/employ/'.$filename));
 			if($user){

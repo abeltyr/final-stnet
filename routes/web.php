@@ -38,7 +38,7 @@ Route::group(['prefix'=>'{SchoolName}'],function (){
         'uses' => 'SchoolAdminController@index',
     ]);
     Route::resources([
-       'Staff' => "StaffsController"
+       '/Staff' => "StaffsController"
     ]);
 
 });
