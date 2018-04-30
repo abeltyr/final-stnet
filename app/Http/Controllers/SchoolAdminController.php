@@ -37,8 +37,8 @@ class SchoolAdminController extends Controller
     }
     //for the above redirect
     //logout 
-	public function schoolLogout(){
         //loging out for admin
+	public function schoolLogout(){
             Auth::guard('schadmin')->logout();
             return redirect()->route('adminSignin');
     }

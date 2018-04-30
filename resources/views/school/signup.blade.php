@@ -101,6 +101,9 @@
             
             </div> 
         </div> 
-        <a href="{{ route('schoolLogout') }}" class="btn btn-block btn-primary col-md-12">Logout
+        <form method="POST" action="{{ route('schoolLogout') }}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn btn-block btn-primary col-md-12">Logout</button>
+        </form>
     </body>
 </html>    

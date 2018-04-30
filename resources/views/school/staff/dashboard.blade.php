@@ -40,7 +40,7 @@
                     </div>
                 </div>    
                 <div class="row">
-                <form enctype="multipart/form-data" action="{{ url(Auth::guard('schadmin')->user()->name.'/'.'Staff') }}" method="post">
+                <form enctype="multipart/form-data" action="{{ url(Auth::guard('schstaff')->user()->school_name.'/'.'Staff') }}" method="post">
                     <div class="col-md-4">
                         <div class="well" >
                             <div class="row">
@@ -102,6 +102,9 @@
             
             </div> 
         </div> 
-        <a href="{{ route('schoolstaffLogout') }}" class="btn btn-block btn-primary col-md-12">Logout
+        <form method="POST" action="{{ route('schoolstaffLogout') }}">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn btn-block btn-primary col-md-12">Logout</button>
+        </form>
     </body>
 </html>    

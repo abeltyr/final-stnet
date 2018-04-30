@@ -29,9 +29,10 @@ class StaffsController extends Controller
 			'password' => 'required|min:8'
 		]);
 		if (Auth::guard('schstaff')->attempt(['email'=> $request['email'], 'password' => $request['password'] ])){
-            $sadmin = Auth::guard('schstaff')->user();
             if(True){
-                return redirect(url('Staff'));
+                $admin = Auth::guard('schstaff')->user();
+                return redirect(url($admin->school_name.'/Staff'));
+                
             }
             else{
                 return redirect()->back()->withErrors('Access denied');
@@ -65,7 +66,7 @@ class StaffsController extends Controller
             return view('school.signup');
         }
         elseif(Auth::guard('schstaff')->check()){
-            return view('school.dashboard');
+            return view('school.staff.dashboard');
         }
         elseif(Auth::guest()){
             return view('school.staff.welcome');

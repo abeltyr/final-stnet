@@ -48,7 +48,7 @@ Route::POST('/SchoolAdminLoging',[
     'uses' => 'SchoolAdminController@schooladminSignin',
     'as' => 'schooladminSignin',
 ]);
-Route::Post('/Schoollogingout',[
+Route::POST('/Schoollogingout',[
     'uses' => 'SchoolAdminController@schoolLogout',
     'as' => 'schoolLogout',
 ]);
