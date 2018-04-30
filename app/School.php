@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class School extends Authenticatable
 {
     //
+    
+    protected $guard = 'schadmin';
+
     protected $fillable = [
         'school_code','name', 'email','representative','address','no_student','school_owner','subscription','subscription_type','phone','avatar',
     ];

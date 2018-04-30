@@ -43,3 +43,12 @@ Route::group(['prefix'=>'{SchoolName}'],function (){
 
 });
 
+
+Route::POST('/SchoolAdminLoging',[
+    'uses' => 'SchoolAdminController@schooladminSignin',
+    'as' => 'schooladminSignin',
+]);
+Route::Post('/Schoollogingout',[
+    'uses' => 'SchoolAdminController@schoolLogout',
+    'as' => 'schoolLogout',
+]);

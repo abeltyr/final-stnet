@@ -49,6 +49,10 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+        'schadmin' => [
+            'driver' => 'session',
+            'provider' => 'schadmins',
+        ],
     ],
 
     /*
@@ -73,11 +77,15 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
         ],
+        'schadmins' => [
+            'driver' => 'eloquent',
+            'model' => App\School::class,
+        ],
+        
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -109,6 +117,11 @@ return [
             'provider' => 'admins',
             'table' => 'password_resets',
             'expire' => 30,
+        ],
+        'schadmins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 0,
         ],
     ],
 
