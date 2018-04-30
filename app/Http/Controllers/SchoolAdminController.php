@@ -21,14 +21,14 @@ class SchoolAdminController extends Controller
 			'password' => 'required|min:8'
 		]);
 		if (Auth::guard('schadmin')->attempt(['email'=> $request['email'], 'password' => $request['password'] ])){
-           // $sadmin = Auth::guard('schadmin')->user();
-//            if($sadmin->name == $schoolname){
-               echo "hi";
-               // return redirect(url('Staff'));
-            //}
-            //else{
-              //  return redirect()->back()->withErrors('Access denied');
-           // }
+           $sadmin = Auth::guard('schadmin')->user();
+            if(True){
+                $admin = Auth::guard('schadmin')->user();
+                return redirect(url($admin->name.'/Staff'));
+            }
+            else{
+              return redirect()->back()->withErrors('Access denied');
+            }
 		}
 		else{
 		    return redirect()->back()->withErrors('Either the email or the password is not correct');
@@ -38,16 +38,12 @@ class SchoolAdminController extends Controller
     //for the above redirect
     //logout 
 	public function schoolLogout(){
-        if(Auth::guard('schadmin')->check())
-        {
+        //loging out for admin
             Auth::guard('schadmin')->logout();
             return redirect()->route('adminSignin');
-        }
-        else
-        {
-        return redirect()->back();
-        }
     }
+
+
 
 
 
@@ -60,7 +56,13 @@ class SchoolAdminController extends Controller
             }
         }
         if($count){
+            if(Auth::guard('schadmin')->check()){
+                $admin = Auth::guard('schadmin')->user();
+                return redirect(url($admin->name.'/Staff'));
+            }
+            else{
                 return view('School.welcome');
+            }
         }
         else{
             echo "the school is not registered";

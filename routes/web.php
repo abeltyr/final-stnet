@@ -38,7 +38,7 @@ Route::group(['prefix'=>'{SchoolName}'],function (){
         'uses' => 'SchoolAdminController@index',
     ]);
     Route::resources([
-       'staff' => "StaffsController"
+       'Staff' => "StaffsController"
     ]);
 
 });
@@ -51,4 +51,13 @@ Route::POST('/SchoolAdminLoging',[
 Route::Post('/Schoollogingout',[
     'uses' => 'SchoolAdminController@schoolLogout',
     'as' => 'schoolLogout',
+]);
+
+Route::POST('/SchoolStaffLoging',[
+    'uses' => 'StaffsController@schoolstaffSignin',
+    'as' => 'schoolstaffSignin',
+]);
+Route::Post('/Schoolstafflogingout',[
+    'uses' => 'StaffsController@schoolstaffLogout',
+    'as' => 'schoolstaffLogout',
 ]);

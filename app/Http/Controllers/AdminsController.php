@@ -123,14 +123,6 @@ class AdminsController extends Controller
                 $admin->user_id = ($add->user_id) + '1';
             }
         }
-        foreach($adds as $add){ 
-            if (($add->id) < 1 ){
-                //$admin->user_id = '15876356';
-            }
-            else{
-                $admin->user_id = ($add->user_id) + '1';
-            }
-        }	
 		$admin->role_id = '0';
 		$admin->pin = $pin;
         $admin->password = $password;
