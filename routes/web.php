@@ -40,6 +40,21 @@ Route::group(['prefix'=>'{SchoolName}'],function (){
     Route::resources([
        '/Staff' => "StaffsController"
     ]);
+    Route::GET('/Batch',[
+        'uses' => 'batchController@index',
+    ]);
+    Route::Post('/BatchADD',[
+        'uses' => 'batchController@batch',
+    ]);
+
+    Route::POST('/batch/tableadded',[
+        'uses' => 'batchController@addtable',
+    ]);
+
+    Route::GET('/batch/table/view',[
+        'uses' => 'batchController@viewtab',
+    ]);
+
 
 });
 
