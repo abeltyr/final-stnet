@@ -42,7 +42,7 @@
     </div> 
     @endif 
 <div class="well col-md-12" style="padding:50px; background:#2f384b; border:0px;" >
-<form enctype="multipart/form-data" action="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batchs') }}" method="post">
+<form enctype="multipart/form-data" action="{{ url(Auth::guard('schstaff')->user()->school_name.'/staff/Batch') }}" method="post">
 {{ csrf_field() }}
 <div class="form-group form-group-default" >
     <label>Grade</label>
@@ -465,17 +465,17 @@
                     <th >{{$bat->subj19}} </th> 
                     <th >{{$bat->subj20}} </th>
                     <th>
-                        <form  action="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batch/tableadded') }}" method="POST">
+                        <form  action="{{ url(Auth::guard('schstaff')->user()->school_name.'/Staff/Batch/tableadded') }}" method="POST">
                             <input type="hidden" name="see" value="{{$bat->id}}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">  
                             <input type="submit" class="btn btn-lg btn-success col-md-12 col-sm-12 col-xs-12  " value="add table" >
                         </form>
                     </th>
                     <th>
-                        <a type="button" href="{{ URL::to(Auth::guard('schstaff')->user()->school_name.'/Batchs/edit', $bat->id) }}" class="btn btn-lg btn-warning col-md-12 col-sm-12 col-xs-12 " >Edit table</a>
+                        <a type="button" href="{{ URL::to(Auth::guard('schstaff')->user()->school_name.'/staff/Batch/edit', $bat->id) }}" class="btn btn-lg btn-warning col-md-12 col-sm-12 col-xs-12 " >Edit table</a>
                     </th>
                     <th>
-                        <a type="button" href="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batchs', $bat->id) }}" class="btn btn-lg btn-danger col-md-12 col-sm-12 col-xs-12 " >Update table</a>
+                        <a type="button" href="{{ url(Auth::guard('schstaff')->user()->school_name.'/staff/Batch', $bat->id) }}" class="btn btn-lg btn-danger col-md-12 col-sm-12 col-xs-12 " >Update table</a>
                     </th>
                 </tr>
             </tbody>

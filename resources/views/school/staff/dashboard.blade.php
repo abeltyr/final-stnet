@@ -12,7 +12,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/voyage/app.css') }}" rel="stylesheet">
     </head>
-    <body class="login" >
+    <body class="login" style="overflow: auto;" >
         <div class="col-md-8 col-md-offset-2" >
     
             <div class="well col-md-12  hidden-sm hidden-xs lightblack" >
@@ -106,6 +106,6 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <button type="submit" class="btn btn-block btn-primary col-md-12">Logout</button>
         </form>
-        <a href="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batchs') }}"class="btn mdc-button--raised btn-primary col-md-11" style="background:#3895ac; font-size:20px; margin:2%;"> Batch</a>  
+        <a href="{{ url(Auth::guard('schstaff')->user()->school_name.'/staff/Batch') }}"class="btn mdc-button--raised btn-primary col-md-11" style="background:#3895ac; font-size:20px; margin:2%;"> Batch</a>
     </body>
 </html>    
