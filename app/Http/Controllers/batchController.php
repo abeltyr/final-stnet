@@ -34,7 +34,7 @@ class BatchController extends Controller
         Schema::dropIfExists($tabb->tablename);
         $ta = table::findOrFail($id);
         $ta->delete();
-        return redirect(url(Auth::guard('schstaff')->user()->school_name.'/Batchs/Batchs'))->withsuccesstabledelet('Successfully Deleted Table');  
+        return redirect(url(Auth::guard('schstaff')->user()->school_name.'/Batchs'))->withsuccesstabledelet('Successfully Deleted Table');  
     }
 
 
@@ -239,12 +239,12 @@ class BatchController extends Controller
                     $table->save();
                 }
                 else{
-                    return redirect(url(Auth::guard('schstaff')->user()->school_name.'/Batchs/Batchs'))->withsubfailtable('Table already Add');
+                    return redirect(url(Auth::guard('schstaff')->user()->school_name.'/Batchs'))->withsubfailtable('Table already Add');
                 }
             }
            $num++;
             }
-            return redirect(url(Auth::guard('schstaff')->user()->school_name.'/Batchs/Batchs'))->withsuccesstable('Successfully added Table');    
+            return redirect(url(Auth::guard('schstaff')->user()->school_name.'/Batchs'))->withsuccesstable('Successfully added Table');    
         }
 
 
@@ -482,7 +482,7 @@ class BatchController extends Controller
      */
     public function show($SchoolName,$id)
     {
-        echo 'he';
+        echo 'hfhe';
     }
 
     /**

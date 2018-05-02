@@ -436,7 +436,8 @@
                 <th  scope="col" >Delet</th>
             </tr>
         </thead>
-        @foreach($bats as $bat)     
+        @foreach($bats as $bat)   
+            @if( $bat->school_name  == (Auth::guard('schstaff')->user()->school_name)  )     
             <tbody>
                 <tr>
                     <th >{{ $bat->school_name }}</th>
@@ -472,13 +473,19 @@
                         </form>
                     </th>
                     <th>
-                        <a type="button" href="{{ URL::to(Auth::guard('schstaff')->user()->school_name.'/Batchs/edit', $bat->id) }}" class="btn btn-lg btn-warning col-md-12 col-sm-12 col-xs-12 " >Edit table</a>
+                        
+                            <form  action="{{ URL::to(Auth::guard('schstaff')->user()->school_name.'/Batchs/Batchs', [$bat->id]) }}" method="POST">
+                                <input type="hidden" name="see" value="{{$bat->id}}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">  
+                                <input type="submit" class="btn btn-lg btn-success col-md-12 col-sm-12 col-xs-12  " value="Edit table" >
+                            </form>
                     </th>
                     <th>
                         <a type="button" href="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batchs', $bat->id) }}" class="btn btn-lg btn-danger col-md-12 col-sm-12 col-xs-12 " >Update table</a>
                     </th>
                 </tr>
             </tbody>
+            @endif
         @endforeach
       </table>
     </div>  
