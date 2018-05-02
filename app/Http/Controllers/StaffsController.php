@@ -18,10 +18,6 @@ class StaffsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
-
-
-    
     public function schoolstaffSignin(Request $request)
 	{
 		$this->validate($request, [
@@ -62,17 +58,36 @@ class StaffsController extends Controller
 
 
     
-    public function index()
-    { 
-        if(Auth::guard('schadmin')->check()){
-            return view('school.signup');
+    public function index($SchoolName)
+    {
+        $schools = School::all();
+        $count = 0;
+        foreach ($schools as $school) {
+            if ($school->name == $SchoolName){
+                $count++;
+            }
         }
-        elseif(Auth::guard('schstaff')->check()){
-            return view('school.staff.dashboard');
+        if($count){
+            if(Auth::guard('schadmin')->check()){
+                $admin = Auth::guard('schadmin')->user();
+                return redirect(url($admin->name.'/Staff'));
+            }
+            else{
+                if(Auth::guard('schadmin')->check()){
+                    return view('school.signup');
+                }
+                elseif(Auth::guard('schstaff')->check()){
+                    return view('school.staff.dashboard');
+                }
+                elseif(Auth::guest()){
+                    return view('school.staff.welcome');
+                }
+            }
         }
-        elseif(Auth::guest()){
-            return view('school.staff.welcome');
+        else{
+            echo "the school is not registered";
         }
+
     }
 
     /**
@@ -83,6 +98,7 @@ class StaffsController extends Controller
     public function create()
     {
         //
+        echo "";
     }
 
     /**
