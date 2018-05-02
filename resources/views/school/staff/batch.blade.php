@@ -436,7 +436,8 @@
                 <th  scope="col" >Delet</th>
             </tr>
         </thead>
-        @foreach($bats as $bat)     
+        @foreach($bats as $bat)   
+            @if( $bat->school_name  == (Auth::guard('schstaff')->user()->school_name)  )     
             <tbody>
                 <tr>
                     <th >{{ $bat->school_name }}</th>
@@ -479,6 +480,7 @@
                     </th>
                 </tr>
             </tbody>
+            @endif
         @endforeach
       </table>
     </div>  

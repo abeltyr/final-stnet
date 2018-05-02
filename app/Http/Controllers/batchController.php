@@ -81,14 +81,14 @@ class BatchController extends Controller
             'subject4' => 'required|max:120',
             'subject5' => 'required|max:120|',
         ]);
-        $subjects[]s = [];
+        $subjects = [];
         for ($i = 1; $i<=20; $i++){
             if ($request['subject'.$i]) {
-                array_push($subjects[]s, $request['subject'.$i]);
+                array_push($subjects, $request['subject'.$i]);
             }
 
         }
-        $subjects[]s = array_unique($subjects[]s);
+        $subjects = array_unique($subjects);
 
 
         //adding the table
@@ -114,44 +114,44 @@ class BatchController extends Controller
         if($subjects[6]){
             $batch->subj7 = $subjects[6];
         }
-        if($subjects[]8){
-            $batch->subj8 = $subjects[]s[]8;
+        if($subjects[7]){
+            $batch->subj8 = $subjects[7];
         }
-        if($subjects[]9){
-            $batch->subj9 = $subjects[]9;
+        if($subjects[8]){
+            $batch->subj9 = $subjects[8];
         }
-        if($subjects[]10){
-            $batch->subj10 = $subjects[]10;
+        if($subjects[9]){
+            $batch->subj10 = $subjects[9];
         }
-        if($subjects[]11){
-            $batch->subj11 = $subjects[]11;
+        if($subjects[10]){
+            $batch->subj11 = $subjects[10];
         }
-        if($subjects[]12){
-            $batch->subj12 = $subjects[]12;
+        if($subjects[11]){
+            $batch->subj12 = $subjects[11];
         }
-        if($subjects[]13){
-            $batch->subj13 = $subjects[]13;
+        if($subjects[12]){
+            $batch->subj13 = $subjects[12];
         }
-        if($subjects[]14){
-            $batch->subj14 = $subjects[]14;
+        if($subjects[13]){
+            $batch->subj14 = $subjects[13];
         }
-        if($subjects[]15){
-            $batch->subj15 = $subjects[]15;
+        if($subjects[14]){
+            $batch->subj15 = $subjects[14];
         }
-        if($subjects[]16){
-            $batch->subj16 = $subjects[]16;
+        if($subjects[15]){
+            $batch->subj16 = $subjects[15];
         }
-        if($subjects[]17){
-            $batch->subj17 = $subjects[]17;
+        if($subjects[16]){
+            $batch->subj17 = $subjects[16];
         }
-        if($subjects[]18){
-            $batch->subj18 = $subjects[]18;
+        if($subjects[17]){
+            $batch->subj18 = $subjects[17];
         }
-        if($subjects[]19){
-            $batch->subj19 = $subjects[]19;
+        if($subjects[18]){
+            $batch->subj19 = $subjects[18];
         }
-        if($subjects[]20){
-            $batch->subj20 = $subjects[]20;
+        if($subjects[19]){
+            $batch->subj20 = $subjects[19];
         }
 
     }

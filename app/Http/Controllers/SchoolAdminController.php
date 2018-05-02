@@ -52,8 +52,8 @@ class SchoolAdminController extends Controller
 
 
     public function index($SchoolName){
-            $schools = School::all();
-            $count = 0;
+        $schools = School::all();
+        $count = 0;
         foreach ($schools as $school) {
             if ($school->name == $SchoolName){
                 $count++;
