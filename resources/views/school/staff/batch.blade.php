@@ -42,7 +42,7 @@
     </div> 
     @endif 
 <div class="well col-md-12" style="padding:50px; background:#2f384b; border:0px;" >
-<form enctype="multipart/form-data" action="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batch') }}" method="post">
+<form enctype="multipart/form-data" action="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batchs') }}" method="post">
 {{ csrf_field() }}
 <div class="form-group form-group-default" >
     <label>Grade</label>
@@ -387,18 +387,18 @@
 
 </form>
 <div class="well col-md-12" style=" background:#2f384b; overflow-x:auto;"> 
-@if(session('subfail'))   
+@if(session('subfailtable'))   
 <div class="alert " style="  padding: 20px;  background-color: #f44336; /* Red */ color: white; border-left:6px solid #6b1905;  margin-bottom: 5px;">
     <span style="margin-left: 15px;  color: white;  font-weight: bold;  font-size:20px; float: right;  font-size: 22px;  line-height: 20px;  cursor: pointer;"
     onclick="this.parentElement.style.display='none';">&times;</span>
-<p style="color: white; text-align:center; font-size:20px;"> {{session('subfail')}} </p>
+<p style="color: white; text-align:center; font-size:20px;"> {{session('subfailtable')}} </p>
 </div> 
 @endif 
-@if(session('success'))
+@if(session('successtable'))
 <div class="alert " style="  padding: 15px;  background-color: #44f436;  border-left:6px solid #0ca120; margin-bottom: 5px;">
         <span style="margin-left: 15px;  color: white;  font-weight: bold;  float: right;  font-size: 22px;  line-height: 20px;  cursor: pointer;"
               onclick="this.parentElement.style.display='none';">&times;</span>
-    <p class="sute" > {{session('success')}} </p>
+    <p class="sute" > {{session('successtable')}} </p>
 </div>
 @endif
 
@@ -406,11 +406,11 @@
 <table class="table table-bordered" >
         <thead class="thead-light">
             <tr>
-                <th  scope="col" >school_name</th>
-                <th  scope="col" >school_code</th> 
-                <th  scope="col" >testno </th>
-                <th  scope="col" >no_section </th>
-                <th  scope="col" >grade</th> 
+                <th  scope="col" >school name</th>
+                <th  scope="col" >school code</th> 
+                <th  scope="col" >test number </th>
+                <th  scope="col" >number section </th>
+                <th  scope="col" >batch</th> 
                 <th  scope="col" >subj1 </th>
                 <th  scope="col" >subj2 </th>
                 <th  scope="col" >subj3 </th> 
@@ -436,52 +436,97 @@
                 <th  scope="col" >Delet</th>
             </tr>
         </thead>
+        @foreach($bats as $bat)     
+            <tbody>
+                <tr>
+                    <th >{{ $bat->school_name }}</th>
+                    <th >{{$bat->school_code}}</th> 
+                    <th >{{$bat->testno}} </th>
+                    <th >{{$bat->no_section}} </th>
+                    <th >{{$bat->batch}}</th> 
+                    <th >{{$bat->subj1}} </th>
+                    <th >{{$bat->subj2}} </th>
+                    <th >{{$bat->subj3}} </th> 
+                    <th >{{$bat->subj4}} </th>
+                    <th >{{$bat->subj5}} </th>
+                    <th >{{$bat->subj6}} </th> 
+                    <th >{{$bat->subj7}} </th>
+                    <th >{{$bat->subj8}} </th>
+                    <th >{{$bat->subj9}} </th> 
+                    <th >{{$bat->subj10}} </th>
+                    <th >{{$bat->subj11}} </th>
+                    <th >{{$bat->subj12}} </th>
+                    <th >{{$bat->subj13}} </th> 
+                    <th >{{$bat->subj14}} </th>
+                    <th >{{$bat->subj15}} </th>
+                    <th >{{$bat->subj16}} </th> 
+                    <th >{{$bat->subj17}} </th>
+                    <th >{{$bat->subj18}} </th>
+                    <th >{{$bat->subj19}} </th> 
+                    <th >{{$bat->subj20}} </th>
+                    <th>
+                        <form  action="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batch/tableadded') }}" method="POST">
+                            <input type="hidden" name="see" value="{{$bat->id}}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">  
+                            <input type="submit" class="btn btn-lg btn-success col-md-12 col-sm-12 col-xs-12  " value="add table" >
+                        </form>
+                    </th>
+                    <th>
+                        <a type="button" href="{{ URL::to(Auth::guard('schstaff')->user()->school_name.'/Batchs/edit', $bat->id) }}" class="btn btn-lg btn-warning col-md-12 col-sm-12 col-xs-12 " >Edit table</a>
+                    </th>
+                    <th>
+                        <a type="button" href="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batchs', $bat->id) }}" class="btn btn-lg btn-danger col-md-12 col-sm-12 col-xs-12 " >Update table</a>
+                    </th>
+                </tr>
+            </tbody>
+        @endforeach
+      </table>
+    </div>  
+</div>
+<div class="well col-md-12" style=" background:#2f384b; overflow-x:auto;"> 
+@if(session('subfail'))   
+<div class="alert " style="  padding: 20px;  background-color: #f44336; /* Red */ color: white; border-left:6px solid #6b1905;  margin-bottom: 5px;">
+    <span style="margin-left: 15px;  color: white;  font-weight: bold;  font-size:20px; float: right;  font-size: 22px;  line-height: 20px;  cursor: pointer;"
+    onclick="this.parentElement.style.display='none';">&times;</span>
+<p style="color: white; text-align:center; font-size:20px;"> {{session('subfailtable')}} </p>
+</div> 
+@endif 
+@if(session('successtabledelet'))
+<div class="alert " style="  padding: 15px;  background-color: #44f436;  border-left:6px solid #0ca120; margin-bottom: 5px;">
+        <span style="margin-left: 15px;  color: white;  font-weight: bold;  float: right;  font-size: 22px;  line-height: 20px;  cursor: pointer;"
+              onclick="this.parentElement.style.display='none';">&times;</span>
+    <p class="sute" > {{session('successtabledelet')}} </p>
+</div>
+@endif
+
+
+<table class="table table-bordered" >
+        <thead class="thead-light">
+            <tr>
+                <th  scope="col" >school_name</th>
+                <th  scope="col" >school_code</th> 
+                <th  scope="col" >table </th>
+                <th  scope="col" >Delete</th>
+            </tr>
+        </thead>
         @foreach($tabs as $tab)          
         <tbody>
             <tr>
-                <th >{{ $tab->school_name }}</th>
-                <th >{{$tab->school_code}}</th> 
-                <th >{{$tab->testno}} </th>
-                <th >{{$tab->no_section}} </th>
-                <th >{{$tab->batch}}</th> 
-                <th >{{$tab->subj1}} </th>
-                <th >{{$tab->subj2}} </th>
-                <th >{{$tab->subj3}} </th> 
-                <th >{{$tab->subj4}} </th>
-                <th >{{$tab->subj5}} </th>
-                <th >{{$tab->subj6}} </th> 
-                <th >{{$tab->subj7}} </th>
-                <th >{{$tab->subj8}} </th>
-                <th >{{$tab->subj9}} </th> 
-                <th >{{$tab->subj10}} </th>
-                <th >{{$tab->subj11}} </th>
-                <th >{{$tab->subj12}} </th>
-                <th >{{$tab->subj13}} </th> 
-                <th >{{$tab->subj14}} </th>
-                <th >{{$tab->subj15}} </th>
-                <th >{{$tab->subj16}} </th> 
-                <th >{{$tab->subj17}} </th>
-                <th >{{$tab->subj18}} </th>
-                <th >{{$tab->subj19}} </th> 
-                <th >{{$tab->subj20}} </th>
+                <th >{{ $tab->schoolname }}</th>
+                <th >{{$tab->schoolcode}}</th> 
+                <th >{{$tab->tablename}} </th>
                 <th>
-                    <form  action="{{ url(Auth::guard('schstaff')->user()->school_name.'/batch/tableadded') }}" method="POST">
-                        <input type="hidden" name="see" value="{{$tab->id}}">
+                    <form  action="{{ url(Auth::guard('schstaff')->user()->school_name.'/Table/delete') }}" method="POST">
+                        <input type="hidden" name="see" value="{{ $tab->id }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">  
-                        <input type="submit" class="btn btn-lg btn-success col-md-12 col-sm-12 col-xs-12 hidden-sm hidden-xs  " value="add table" >
+                        <input type="submit" class="btn btn-lg btn-danger col-md-12 col-sm-12 col-xs-12  " value="delete table" >
                     </form>
-                </th>
-                <th>
-                    <a type="button" href="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batch/edit', $tab->id) }}" class="btn btn-lg btn-warning col-md-12 col-sm-12 col-xs-12 " >Edit table</a>
-                </th>
-                <th>
-                    <a type="button" href="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batch', $tab->id) }}" class="btn btn-lg btn-danger col-md-12 col-sm-12 col-xs-12 " >Update table</a>
                 </th>
             </tr>
         </tbody>
         @endforeach
       </table>
-    </div>  
+    </div> 
 </div>
 </main>
 </div>

@@ -27,6 +27,18 @@ class BatchController extends Controller
 
      
     // create table by the user  
+
+    public function Tabledelete(Request $request, $SchoolName){
+        $id = $request['see'];
+        $tabb = table::find($id);
+        Schema::dropIfExists($tabb->tablename);
+        $ta = table::findOrFail($id);
+        $ta->delete();
+        return redirect(url(Auth::guard('schstaff')->user()->school_name.'/Staff/Batchs/Batchs'))->withsuccesstabledelet('Successfully Deleted Table');  
+    }
+
+
+
     public function addtable(Request $request, $SchoolName){ 
 
         $num = 1; 
@@ -132,8 +144,8 @@ class BatchController extends Controller
                     }
             }); 
             $table = new table();
-            $table->schoolcode = $schname;
-            $table->schoolname = $schcode;
+            $table->schoolcode = $schcode;
+            $table->schoolname = $schname;
             $table->tablename = $tabname;
             $table->save();
             //add the created table name to an already existing table called table
@@ -221,18 +233,18 @@ class BatchController extends Controller
                         }
                     }); 
                     $table = new table();
-                    $table->schoolcode = $schname;
-                    $table->schoolname = $schcode;
+                    $table->schoolcode = $schcode;
+                    $table->schoolname = $schname;
                     $table->tablename = $tabname;
                     $table->save();
                 }
                 else{
-                    return redirect(url(Auth::guard('schstaff')->user()->school_name.'/batch/table/view'))->withsubfail('Table already Add');
+                    return redirect(url(Auth::guard('schstaff')->user()->school_name.'/Staff/Batchs/Batchs'))->withsubfailtable('Table already Add');
                 }
             }
            $num++;
             }
-            return redirect(url(Auth::guard('schstaff')->user()->school_name.'/batch/table/view'))->withsuccess('Successfully added Table');    
+            return redirect(url(Auth::guard('schstaff')->user()->school_name.'/Staff/Batchs/Batchs'))->withsuccesstable('Successfully added Table');    
         }
 
 
@@ -246,8 +258,9 @@ class BatchController extends Controller
 
     public function index($SchoolName)
     {
-        $tabs = batch::all();
-        return view('school.staff.batch',['tabs'=> $tabs]);
+        $tabs = table::all();
+        $bats = batch::all();
+        return view('school.staff.batch',['tabs'=> $tabs,'bats'=> $bats]);
     }
 
     /**
@@ -458,7 +471,7 @@ class BatchController extends Controller
             $batch->subj20 = $subject20;
         }
         $batch->save();
-        return redirect(url(Auth::guard('schstaff')->user()->school_name.'/Batch'))->withsuccess('Successfully added ');
+        return redirect(url(Auth::guard('schstaff')->user()->school_name.'/Staff/Batchs/Batchs'))->withsuccess('Successfully added ');
     }
 
     /**
@@ -480,7 +493,7 @@ class BatchController extends Controller
      */
     public function edit($id)
     {
-        //
+        echo 'he';
     }
 
     /**

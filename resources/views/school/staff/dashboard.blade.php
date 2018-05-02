@@ -106,6 +106,6 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <button type="submit" class="btn btn-block btn-primary col-md-12">Logout</button>
         </form>
-        <a href="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batch') }}"class="btn mdc-button--raised btn-primary col-md-11" style="background:#3895ac; font-size:20px; margin:2%;"> Batch</a>  
+        <a href="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batchs') }}"class="btn mdc-button--raised btn-primary col-md-11" style="background:#3895ac; font-size:20px; margin:2%;"> Batch</a>  
     </body>
 </html>    
