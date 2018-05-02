@@ -120,5 +120,5 @@
                     </button>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                 </form>
-    </body>
+        </body>
 </html>
