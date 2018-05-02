@@ -22,7 +22,9 @@
 </head>
 
 <body class="login" style="overflow-y:auto;">
+
 <div class="well col-md-12" style=" background:#2f384b;">
+    
     @if(count($errors) > 0)   
     @foreach($errors->all() as $error)
         <div class="alert " style="  padding: 20px;  background-color: #f44336; /* Red */ color: white; border-left:6px solid #6b1905;  margin-bottom: 5px;">
@@ -40,7 +42,7 @@
     </div> 
     @endif 
 <div class="well col-md-12" style="padding:50px; background:#2f384b; border:0px;" >
-<form enctype="multipart/form-data" action="{{ url(Auth::guard('schstaff')->user()->school_name.'/BatchADD') }}" method="post">
+<form enctype="multipart/form-data" action="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batch') }}" method="post">
 {{ csrf_field() }}
 <div class="form-group form-group-default" >
     <label>Grade</label>
@@ -384,8 +386,102 @@
 
 
 </form>
+<div class="well col-md-12" style=" background:#2f384b; overflow-x:auto;"> 
+@if(session('subfail'))   
+<div class="alert " style="  padding: 20px;  background-color: #f44336; /* Red */ color: white; border-left:6px solid #6b1905;  margin-bottom: 5px;">
+    <span style="margin-left: 15px;  color: white;  font-weight: bold;  font-size:20px; float: right;  font-size: 22px;  line-height: 20px;  cursor: pointer;"
+    onclick="this.parentElement.style.display='none';">&times;</span>
+<p style="color: white; text-align:center; font-size:20px;"> {{session('subfail')}} </p>
+</div> 
+@endif 
+@if(session('success'))
+<div class="alert " style="  padding: 15px;  background-color: #44f436;  border-left:6px solid #0ca120; margin-bottom: 5px;">
+        <span style="margin-left: 15px;  color: white;  font-weight: bold;  float: right;  font-size: 22px;  line-height: 20px;  cursor: pointer;"
+              onclick="this.parentElement.style.display='none';">&times;</span>
+    <p class="sute" > {{session('success')}} </p>
+</div>
+@endif
 
-<a href="{{ url(Auth::guard('schstaff')->user()->school_name.'/batch/table/view') }}" class="btn mdc-button--raised btn-primary col-md-12" style="background:#3895ac; font-size:15px; text-transform: uppercase;" >CHECK {{ Auth::guard('schstaff')->user()->school_name }} BATCH</a>
+
+<table class="table table-bordered" >
+        <thead class="thead-light">
+            <tr>
+                <th  scope="col" >school_name</th>
+                <th  scope="col" >school_code</th> 
+                <th  scope="col" >testno </th>
+                <th  scope="col" >no_section </th>
+                <th  scope="col" >grade</th> 
+                <th  scope="col" >subj1 </th>
+                <th  scope="col" >subj2 </th>
+                <th  scope="col" >subj3 </th> 
+                <th  scope="col" >subj4 </th>
+                <th  scope="col" >subj5 </th>
+                <th  scope="col" >subj6 </th> 
+                <th  scope="col" >subj7 </th>
+                <th  scope="col" >subj8</th>
+                <th  scope="col" >subj9</th> 
+                <th  scope="col" >subj10</th>
+                <th  scope="col" >subj11</th>
+                <th  scope="col" >subj12</th>
+                <th  scope="col" >subj13</th> 
+                <th  scope="col" >subj14</th>
+                <th  scope="col" >subj15</th>
+                <th  scope="col" >subj16</th> 
+                <th  scope="col" >subj17</th>
+                <th  scope="col" >subj18</th>
+                <th  scope="col" >subj19</th> 
+                <th  scope="col" >subj20</th>
+                <th  scope="col" >ADD</th>
+                <th  scope="col" >Edit</th>
+                <th  scope="col" >Delet</th>
+            </tr>
+        </thead>
+        @foreach($tabs as $tab)          
+        <tbody>
+            <tr>
+                <th >{{ $tab->school_name }}</th>
+                <th >{{$tab->school_code}}</th> 
+                <th >{{$tab->testno}} </th>
+                <th >{{$tab->no_section}} </th>
+                <th >{{$tab->batch}}</th> 
+                <th >{{$tab->subj1}} </th>
+                <th >{{$tab->subj2}} </th>
+                <th >{{$tab->subj3}} </th> 
+                <th >{{$tab->subj4}} </th>
+                <th >{{$tab->subj5}} </th>
+                <th >{{$tab->subj6}} </th> 
+                <th >{{$tab->subj7}} </th>
+                <th >{{$tab->subj8}} </th>
+                <th >{{$tab->subj9}} </th> 
+                <th >{{$tab->subj10}} </th>
+                <th >{{$tab->subj11}} </th>
+                <th >{{$tab->subj12}} </th>
+                <th >{{$tab->subj13}} </th> 
+                <th >{{$tab->subj14}} </th>
+                <th >{{$tab->subj15}} </th>
+                <th >{{$tab->subj16}} </th> 
+                <th >{{$tab->subj17}} </th>
+                <th >{{$tab->subj18}} </th>
+                <th >{{$tab->subj19}} </th> 
+                <th >{{$tab->subj20}} </th>
+                <th>
+                    <form  action="{{ url(Auth::guard('schstaff')->user()->school_name.'/batch/tableadded') }}" method="POST">
+                        <input type="hidden" name="see" value="{{$tab->id}}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">  
+                        <input type="submit" class="btn btn-lg btn-success col-md-12 col-sm-12 col-xs-12 hidden-sm hidden-xs  " value="add table" >
+                    </form>
+                </th>
+                <th>
+                    <a type="button" href="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batch/edit', $tab->id) }}" class="btn btn-lg btn-warning col-md-12 col-sm-12 col-xs-12 " >Edit table</a>
+                </th>
+                <th>
+                    <a type="button" href="{{ url(Auth::guard('schstaff')->user()->school_name.'/Batch', $tab->id) }}" class="btn btn-lg btn-danger col-md-12 col-sm-12 col-xs-12 " >Update table</a>
+                </th>
+            </tr>
+        </tbody>
+        @endforeach
+      </table>
+    </div>  
 </div>
 </main>
 </div>

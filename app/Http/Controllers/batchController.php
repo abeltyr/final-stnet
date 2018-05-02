@@ -12,17 +12,263 @@ use file;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Http\Controllers\gradecontroller;
 
-class batchController extends Controller
+class BatchController extends Controller
 {
-    public function index(){
-        return view('school.staff.batch');
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
+
+
+
+     
+    // create table by the user  
+    public function addtable(Request $request, $SchoolName){ 
+
+        $num = 1; 
+        $id = $request['see'];
+        $this->ids = $id;
+        $tabb = batch::find($this->ids);
+        $notest = $tabb->testno;
+        $schname = $tabb->school_name;
+        $schcode = $tabb->school_code;
+        $batch1 = $tabb->batch;
+
+        // run in a loop to add multible able depending on the number of test
+
+        while($num <= $notest){
+            $tabname =  $schname.'_'.$schcode.'_'.$batch1.'_'.$num;
+            $viewtabs = table::all();
+            $count = 1;
+            foreach($viewtabs as $viewtab) {
+                if ( $tabname == ($viewtab->tablename)  ){
+                    $count--;
+                }
+            }   
+            // the if below check if the table exist by checking wheather the model table is empty
+            if ($viewtabs->isEmpty()) {                   
+                Schema::create(  $tabname, function (Blueprint $table) { 
+                    $tabb = batch::find($this->ids);
+                    $subject1 = $tabb->subj1;
+                    $subject2 = $tabb->subj2;
+                    $subject3 = $tabb->subj3;
+                    $subject4 = $tabb->subj4;
+                    $subject5 = $tabb->subj5;
+                    $subject6 = $tabb->subj6;
+                    $subject7 = $tabb->subj7;
+                    $subject8 = $tabb->subj8;
+                    $subject9 = $tabb->subj9;
+                    $subject10 = $tabb->subj10;
+                    $subject11 = $tabb->subj11;
+                    $subject12 = $tabb->subj12;
+                    $subject13 = $tabb->subj13;
+                    $subject14 = $tabb->subj14;
+                    $subject15 = $tabb->subj15;
+                    $subject16 = $tabb->subj16;
+                    $subject17 = $tabb->subj17;
+                    $subject18 = $tabb->subj18;
+                    $subject19 = $tabb->subj19;
+                    $subject20 = $tabb->subj20;
+                    $table->increments('id');
+                    $table->string('school_code');
+                    $table->string('schoolname');
+                    $table->string('firstname');
+                    $table->string('lastname');
+                    $table->string('studentid');
+                    $table->string('section');
+                    $table->string($subject1);
+                    $table->string($subject2);
+                    $table->string($subject3);
+                    $table->string($subject4);
+                    $table->string($subject5);
+                    if($subject6 !== 'none'){
+                    $table->string($subject6);
+                    }
+                    if($subject7 !== 'none'){
+                    $table->string($subject7);
+                    }
+                    if($subject8 !== 'none'){
+                    $table->string($subject8);
+                    }
+                    if($subject9 !== 'none'){
+                    $table->string($subject9);
+                    }
+                    if($subject10 !== 'none'){
+                    $table->string($subject10);
+                    }
+                    if($subject11 !== 'none'){
+                    $table->string($subject11);
+                    }
+                    if($subject12 !== 'none'){
+                    $table->string($subject12);
+                    }
+                    if($subject13 !== 'none'){
+                    $table->string($subject13);
+                    }
+                    if($subject14 !== 'none'){
+                    $table->string($subject14);
+                    }
+                    if($subject15 !== 'none'){
+                    $table->string($subject15);
+                    }
+                    if($subject16 !== 'none'){
+                    $table->string($subject16);
+                    }
+                    if($subject17 !== 'none'){
+                    $table->string($subject17);
+                    }
+                    if($subject18 !== 'none'){
+                    $table->string($subject18);
+                    }
+                    if($subject19 !== 'none'){
+                    $table->string($subject19);
+                    }
+                    if($subject20 !== 'none'){
+                    $table->string($subject20);
+                    }
+            }); 
+            $table = new table();
+            $table->schoolcode = $schname;
+            $table->schoolname = $schcode;
+            $table->tablename = $tabname;
+            $table->save();
+            //add the created table name to an already existing table called table
+            }
+            else{     
+                if($count == 1){
+                    Schema::create(  $tabname, function (Blueprint $table) { 
+                        $tabb = batch::find($this->ids);
+                        $subject1 = $tabb->subj1;
+                        $subject2 = $tabb->subj2;
+                        $subject3 = $tabb->subj3;
+                        $subject4 = $tabb->subj4;
+                        $subject5 = $tabb->subj5;
+                        $subject6 = $tabb->subj6;
+                        $subject7 = $tabb->subj7;
+                        $subject8 = $tabb->subj8;
+                        $subject9 = $tabb->subj9;
+                        $subject10 = $tabb->subj10;
+                        $subject11 = $tabb->subj11;
+                        $subject12 = $tabb->subj12;
+                        $subject13 = $tabb->subj13;
+                        $subject14 = $tabb->subj14;
+                        $subject15 = $tabb->subj15;
+                        $subject16 = $tabb->subj16;
+                        $subject17 = $tabb->subj17;
+                        $subject18 = $tabb->subj18;
+                        $subject19 = $tabb->subj19;
+                        $subject20 = $tabb->subj20;
+                        $table->increments('id');
+                        $table->string('school_code');
+                        $table->string('schoolname');
+                        $table->string('firstname');
+                        $table->string('lastname');
+                        $table->string('studentid');
+                        $table->string('section');
+                        $table->string($subject1);
+                        $table->string($subject2);
+                        $table->string($subject3);
+                        $table->string($subject4);
+                        $table->string($subject5);
+                        if($subject6 !== 'none'){
+                        $table->string($subject6);
+                        }
+                        if($subject7 !== 'none'){
+                        $table->string($subject7);
+                        }
+                        if($subject8 !== 'none'){
+                        $table->string($subject8);
+                        }
+                        if($subject9 !== 'none'){
+                        $table->string($subject9);
+                        }
+                        if($subject10 !== 'none'){
+                        $table->string($subject10);
+                        }
+                        if($subject11 !== 'none'){
+                        $table->string($subject11);
+                        }
+                        if($subject12 !== 'none'){
+                        $table->string($subject12);
+                        }
+                        if($subject13 !== 'none'){
+                        $table->string($subject13);
+                        }
+                        if($subject14 !== 'none'){
+                        $table->string($subject14);
+                        }
+                        if($subject15 !== 'none'){
+                        $table->string($subject15);
+                        }
+                        if($subject16 !== 'none'){
+                        $table->string($subject16);
+                        }
+                        if($subject17 !== 'none'){
+                        $table->string($subject17);
+                        }
+                        if($subject18 !== 'none'){
+                        $table->string($subject18);
+                        }
+                        if($subject19 !== 'none'){
+                        $table->string($subject19);
+                        }
+                        if($subject20 !== 'none'){
+                        $table->string($subject20);
+                        }
+                    }); 
+                    $table = new table();
+                    $table->schoolcode = $schname;
+                    $table->schoolname = $schcode;
+                    $table->tablename = $tabname;
+                    $table->save();
+                }
+                else{
+                    return redirect(url(Auth::guard('schstaff')->user()->school_name.'/batch/table/view'))->withsubfail('Table already Add');
+                }
+            }
+           $num++;
+            }
+            return redirect(url(Auth::guard('schstaff')->user()->school_name.'/batch/table/view'))->withsuccess('Successfully added Table');    
+        }
+
+
+
+
+
+
+
+
+
+
+    public function index($SchoolName)
+    {
+        $tabs = batch::all();
+        return view('school.staff.batch',['tabs'=> $tabs]);
     }
 
-    // ADD Batch table with 20 subject
- 
-	public function batch(Request $request){
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        
 		$subject1 = $request['subject1'];
 		$subject2 = $request['subject2'];
 		$subject3 = $request['subject3'];
@@ -215,221 +461,48 @@ class batchController extends Controller
         return redirect(url(Auth::guard('schstaff')->user()->school_name.'/Batch'))->withsuccess('Successfully added ');
     }
 
-
-    // create table by the user  
-    public function addtable(Request $request){ 
-
-            $num = 1; 
-            $id = $request['see'];
-            $this->ids = $id;
-            $tabb = batch::find($this->ids);
-            $notest = $tabb->testno;
-            $schname = $tabb->school_name;
-            $schcode = $tabb->school_code;
-            $batch1 = $tabb->batch;
-
-            // run in a loop to add multible able depending on the number of test
-
-            while($num <= $notest){
-                $tabname =  $schname.'_'.$schcode.'_'.$batch1.'_'.$num;
-                $viewtabs = table::all();
-                $count = 1;
-                foreach($viewtabs as $viewtab) {
-                    if ( $tabname == ($viewtab->tablename)  ){
-                        $count--;
-                    }
-                }   
-                // the if below check if the table exist by checking wheather the model table is empty
-                if ($viewtabs->isEmpty()) {                   
-                    Schema::create(  $tabname, function (Blueprint $table) { 
-                        $tabb = batch::find($this->ids);
-                        $subject1 = $tabb->subj1;
-                        $subject2 = $tabb->subj2;
-                        $subject3 = $tabb->subj3;
-                        $subject4 = $tabb->subj4;
-                        $subject5 = $tabb->subj5;
-                        $subject6 = $tabb->subj6;
-                        $subject7 = $tabb->subj7;
-                        $subject8 = $tabb->subj8;
-                        $subject9 = $tabb->subj9;
-                        $subject10 = $tabb->subj10;
-                        $subject11 = $tabb->subj11;
-                        $subject12 = $tabb->subj12;
-                        $subject13 = $tabb->subj13;
-                        $subject14 = $tabb->subj14;
-                        $subject15 = $tabb->subj15;
-                        $subject16 = $tabb->subj16;
-                        $subject17 = $tabb->subj17;
-                        $subject18 = $tabb->subj18;
-                        $subject19 = $tabb->subj19;
-                        $subject20 = $tabb->subj20;
-                        $table->increments('id');
-                        $table->string('school_code');
-                        $table->string('schoolname');
-                        $table->string('firstname');
-                        $table->string('lastname');
-                        $table->string('studentid');
-                        $table->string('section');
-                        $table->string($subject1);
-                        $table->string($subject2);
-                        $table->string($subject3);
-                        $table->string($subject4);
-                        $table->string($subject5);
-                        if($subject6 !== 'none'){
-                        $table->string($subject6);
-                        }
-                        if($subject7 !== 'none'){
-                        $table->string($subject7);
-                        }
-                        if($subject8 !== 'none'){
-                        $table->string($subject8);
-                        }
-                        if($subject9 !== 'none'){
-                        $table->string($subject9);
-                        }
-                        if($subject10 !== 'none'){
-                        $table->string($subject10);
-                        }
-                        if($subject11 !== 'none'){
-                        $table->string($subject11);
-                        }
-                        if($subject12 !== 'none'){
-                        $table->string($subject12);
-                        }
-                        if($subject13 !== 'none'){
-                        $table->string($subject13);
-                        }
-                        if($subject14 !== 'none'){
-                        $table->string($subject14);
-                        }
-                        if($subject15 !== 'none'){
-                        $table->string($subject15);
-                        }
-                        if($subject16 !== 'none'){
-                        $table->string($subject16);
-                        }
-                        if($subject17 !== 'none'){
-                        $table->string($subject17);
-                        }
-                        if($subject18 !== 'none'){
-                        $table->string($subject18);
-                        }
-                        if($subject19 !== 'none'){
-                        $table->string($subject19);
-                        }
-                        if($subject20 !== 'none'){
-                        $table->string($subject20);
-                        }
-                }); 
-                $table = new table();
-                $table->schoolcode = $schname;
-                $table->schoolname = $schcode;
-                $table->tablename = $tabname;
-                $table->save();
-                //add the created table name to an already existing table called table
-                }
-                else{     
-                    if($count == 1){
-                        Schema::create(  $tabname, function (Blueprint $table) { 
-                            $tabb = batch::find($this->ids);
-                            $subject1 = $tabb->subj1;
-                            $subject2 = $tabb->subj2;
-                            $subject3 = $tabb->subj3;
-                            $subject4 = $tabb->subj4;
-                            $subject5 = $tabb->subj5;
-                            $subject6 = $tabb->subj6;
-                            $subject7 = $tabb->subj7;
-                            $subject8 = $tabb->subj8;
-                            $subject9 = $tabb->subj9;
-                            $subject10 = $tabb->subj10;
-                            $subject11 = $tabb->subj11;
-                            $subject12 = $tabb->subj12;
-                            $subject13 = $tabb->subj13;
-                            $subject14 = $tabb->subj14;
-                            $subject15 = $tabb->subj15;
-                            $subject16 = $tabb->subj16;
-                            $subject17 = $tabb->subj17;
-                            $subject18 = $tabb->subj18;
-                            $subject19 = $tabb->subj19;
-                            $subject20 = $tabb->subj20;
-                            $table->increments('id');
-                            $table->string('school_code');
-                            $table->string('schoolname');
-                            $table->string('firstname');
-                            $table->string('lastname');
-                            $table->string('studentid');
-                            $table->string('section');
-                            $table->string($subject1);
-                            $table->string($subject2);
-                            $table->string($subject3);
-                            $table->string($subject4);
-                            $table->string($subject5);
-                            if($subject6 !== 'none'){
-                            $table->string($subject6);
-                            }
-                            if($subject7 !== 'none'){
-                            $table->string($subject7);
-                            }
-                            if($subject8 !== 'none'){
-                            $table->string($subject8);
-                            }
-                            if($subject9 !== 'none'){
-                            $table->string($subject9);
-                            }
-                            if($subject10 !== 'none'){
-                            $table->string($subject10);
-                            }
-                            if($subject11 !== 'none'){
-                            $table->string($subject11);
-                            }
-                            if($subject12 !== 'none'){
-                            $table->string($subject12);
-                            }
-                            if($subject13 !== 'none'){
-                            $table->string($subject13);
-                            }
-                            if($subject14 !== 'none'){
-                            $table->string($subject14);
-                            }
-                            if($subject15 !== 'none'){
-                            $table->string($subject15);
-                            }
-                            if($subject16 !== 'none'){
-                            $table->string($subject16);
-                            }
-                            if($subject17 !== 'none'){
-                            $table->string($subject17);
-                            }
-                            if($subject18 !== 'none'){
-                            $table->string($subject18);
-                            }
-                            if($subject19 !== 'none'){
-                            $table->string($subject19);
-                            }
-                            if($subject20 !== 'none'){
-                            $table->string($subject20);
-                            }
-                        }); 
-                        $table = new table();
-                        $table->schoolcode = $schname;
-                        $table->schoolname = $schcode;
-                        $table->tablename = $tabname;
-                        $table->save();
-                    }
-                    else{
-                        return redirect(url(Auth::guard('schstaff')->user()->school_name.'/batch/table/view'))->withsubfail('Table already Add');
-                    }
-                }
-               $num++;
-        }
-        return redirect(url(Auth::guard('schstaff')->user()->school_name.'/batch/table/view'))->withsuccess('Successfully added Table');    
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($SchoolName,$id)
+    {
+        echo 'he';
     }
 
-    public function viewtab(){
-        $tabs = batch::all();
-        return view('school.staff.viewtab',['tabs'=> $tabs]);
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
 
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }

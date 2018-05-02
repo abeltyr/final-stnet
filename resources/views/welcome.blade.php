@@ -120,6 +120,5 @@
                     </button>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                 </form>
-        <a href="{{ route('batch') }}"class="btn mdc-button--raised btn-primary col-md-offset-2 col-md-8 col-sm-offset-2 col-xs-12 logas" style="background:#3895ac; font-size:20px;"> Batch</a>        
-    </body>
+        </body>
 </html>
