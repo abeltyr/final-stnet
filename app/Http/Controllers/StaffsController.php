@@ -68,11 +68,6 @@ class StaffsController extends Controller
             }
         }
         if($count){
-            if(Auth::guard('schadmin')->check()){
-                $admin = Auth::guard('schadmin')->user();
-                return redirect(url($admin->name.'/Staff'));
-            }
-            else{
                 if(Auth::guard('schadmin')->check()){
                     return view('school.signup');
                 }
@@ -83,7 +78,7 @@ class StaffsController extends Controller
                     return view('school.staff.welcome');
                 }
             }
-        }
+    
         else{
             echo "the school is not registered";
         }

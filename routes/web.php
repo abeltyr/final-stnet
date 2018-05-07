@@ -45,6 +45,12 @@ Route::group(['prefix'=>'{SchoolName}/staff'], function (){
     Route::resources([
        '/Batch'=>'BatchController'
     ]);
+    Route::POST('/Batch/tableadded',[
+        'uses' => 'BatchController@addtable',
+    ]);
+    Route::POST('/Batch/Table/delete',[
+        'uses' => 'BatchController@Tabledelete',
+    ]);
 
 
 

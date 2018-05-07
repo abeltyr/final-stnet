@@ -34,6 +34,13 @@
         </div> 
     @endforeach 
     @endif 
+    @if(session('Error'))   
+        <div class="alert " style="  padding: 20px;  background-color: #f44336; /* Red */ color: white; border-left:6px solid #6b1905;  margin-bottom: 5px;">
+            <span style="margin-left: 15px;  color: white;  font-weight: bold;  float: right;  font-size: 22px;  line-height: 20px;  cursor: pointer;"
+            onclick="this.parentElement.style.display='none';">&times;</span>
+            <p style="color: white; text-align:center;"> session('Error') </p>
+        </div> 
+    @endif 
     @if(session('success'))   
     <div class="alert " style="  padding: 15px;  background-color: #44f436;  border-left:6px solid #0ca120; margin-bottom: 5px;">
         <span style="margin-left: 15px;  color: white;  font-weight: bold;  float: right;  font-size: 22px;  line-height: 20px;  cursor: pointer;"
@@ -466,7 +473,7 @@
                     <th >{{$bat->subj19}} </th> 
                     <th >{{$bat->subj20}} </th>
                     <th>
-                        <form  action="{{ url(Auth::guard('schstaff')->user()->school_name.'/Staff/Batch/tableadded') }}" method="POST">
+                        <form  action="{{ url(Auth::guard('schstaff')->user()->school_name.'/staff/Batch/tableadded') }}" method="POST">
                             <input type="hidden" name="see" value="{{$bat->id}}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">  
                             <input type="submit" class="btn btn-lg btn-success col-md-12 col-sm-12 col-xs-12  " value="add table" >
@@ -518,7 +525,7 @@
                 <th >{{$tab->schoolcode}}</th> 
                 <th >{{$tab->tablename}} </th>
                 <th>
-                    <form  action="{{ url(Auth::guard('schstaff')->user()->school_name.'/Table/delete') }}" method="POST">
+                    <form  action="{{ url(Auth::guard('schstaff')->user()->school_name.'/staff/Batch/Table/delete') }}" method="POST">
                         <input type="hidden" name="see" value="{{ $tab->id }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">  
                         <input type="submit" class="btn btn-lg btn-danger col-md-12 col-sm-12 col-xs-12  " value="delete table" >
