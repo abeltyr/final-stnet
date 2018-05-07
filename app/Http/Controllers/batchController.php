@@ -97,11 +97,11 @@ class BatchController extends Controller
             if ( preg_match("/^[a-zA-Z]*$/", $subjects[$i])){
 
             }
-            else if ( preg_match("/^[0-9]*$/", $subjects[$i])) {
+            else if ( preg_match("/^[0]*$/", $subjects[$i])) {
                 
             }
             else{
-                return redirect()->back()->withError("Only Alpahbetic Letter are allow as subjects name");
+                return redirect()->back()->withErrorof("Only Alpahbetic Letter are allow as subjects name");
             }
 
         }  
@@ -118,7 +118,7 @@ class BatchController extends Controller
 
             }
             else{
-            return redirect()->back()->withError("Can not use same name for two subjects");
+            return redirect()->back()->withErrorof("Can not use same name for two subjects");
             }
         }
 
@@ -134,11 +134,22 @@ class BatchController extends Controller
         $batch->testno = $notest;
         $batch->no_section = $nosection;
         $batch->batch = $batch1;
-        $batch->subj1 = $subjects[0];
-        $batch->subj2 = $subjects[1];
-        $batch->subj3 = $subjects[2];
-        $batch->subj4 = $subjects[3];
-        $batch->subj5 = $subjects[4];
+        
+        if($subjects[0]){
+            $batch->subj1 = $subjects[0];
+        }
+        if($subjects[1]){
+            $batch->subj2 = $subjects[1];
+        }   
+        if($subjects[2]){
+            $batch->subj3 = $subjects[2];
+        }    
+        if($subjects[3]){
+            $batch->subj4 = $subjects[3];
+        }    
+        if($subjects[4]){
+            $batch->subj5 = $subjects[4];
+        }               
         if($subjects[5]){
             $batch->subj6 = $subjects[5];
         }

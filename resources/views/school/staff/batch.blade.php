@@ -34,11 +34,11 @@
         </div> 
     @endforeach 
     @endif 
-    @if(session('Error'))   
+    @if(session('Errorof'))   
         <div class="alert " style="  padding: 20px;  background-color: #f44336; /* Red */ color: white; border-left:6px solid #6b1905;  margin-bottom: 5px;">
             <span style="margin-left: 15px;  color: white;  font-weight: bold;  float: right;  font-size: 22px;  line-height: 20px;  cursor: pointer;"
             onclick="this.parentElement.style.display='none';">&times;</span>
-            <p style="color: white; text-align:center;"> session('Error') </p>
+            <p style="color: white; text-align:center;"> {{ session('Errorof') }} </p>
         </div> 
     @endif 
     @if(session('success'))   
