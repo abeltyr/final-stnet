@@ -16,7 +16,7 @@ class AdminsController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     * 
+     *
      */
     public function adminSignin(Request $request)
 	{
@@ -34,7 +34,7 @@ class AdminsController extends Controller
 
     }
     //for the above redirect
-    //logout 
+    //logout
 	public function Logout(){
         if(Auth::guard('admin')->check())
         {
@@ -46,14 +46,14 @@ class AdminsController extends Controller
         return redirect()->back();
         }
     }
-    
+
     public function index()
     {
 
         if(Auth::guard('admin')->check()){
             return view('stnet.home');
         }
-        elseif(Auth::guest()){
+        else{
             return view('stnet.welcome');
         }
     }
@@ -88,13 +88,13 @@ class AdminsController extends Controller
 		$pin = $request['pin'];
         $password = bcrypt($request['password']);
 
-        //Vallidation 
+        //Vallidation
 		$this->validate($request, [
 			'fname' => 'required|max:120|Alpha',
 			'lname' => 'required|max:120|Alpha',
 			'email' => 'email|unique:admins',
 			'phone' => 'required|unique:admins|max:9|min:9',
-			'pin' => 'required|max:4|min:4',             
+			'pin' => 'required|max:4|min:4',
 			'password' => 'required|min:8|confirmed',
 			'avatar' => 'max:10000',
         ]);
@@ -102,19 +102,19 @@ class AdminsController extends Controller
 
         $admin = new Admin();
 		$admin->firstname = $first_name;
-        $admin->lastname = $last_name; 
-        
-        // adding image to database 
+        $admin->lastname = $last_name;
+
+        // adding image to database
 		if ($request-> hasFile('avatar')){
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
 			Image::make($avatar)->resize(2000, 2000) ->save(public_path('/uploads/admin/'.$filename));
 			if($admin){
 				$admin->avatar = 'admin/'.$filename;
-			} 
+			}
         }
 		$admin->email = $email;
         $admin->phone = $phone;
-        $adds = Admin::all(); 
+        $adds = Admin::all();
         if ($adds->isEmpty()) {
             $userid = rand(10000,99999);
             $admin->user_id = $userid.'1';
@@ -130,7 +130,7 @@ class AdminsController extends Controller
 		Auth::login($admin);
         $admin->save();
         return redirect()->back()->withSuccess("registered successfully");
-        
+
     }
 
     /**
@@ -177,5 +177,5 @@ class AdminsController extends Controller
     {
         //
     }
-    //admin signing in 
+    //admin signing in
 }

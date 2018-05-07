@@ -12,7 +12,7 @@ use file;
 class SchoolAdminController extends Controller
 {
     //
-    
+
 
     public function schooladminSignin(Request $request)
 	{
@@ -36,7 +36,7 @@ class SchoolAdminController extends Controller
 
     }
     //for the above redirect
-    //logout 
+    //logout
         //loging out for admin
 	public function schoolLogout(){
             $admin = Auth::guard('schadmin')->user();
@@ -62,7 +62,12 @@ class SchoolAdminController extends Controller
         if($count){
             if(Auth::guard('schadmin')->check()){
                 $admin = Auth::guard('schadmin')->user();
-                return redirect(url($admin->name.'/Staff'));
+                if ($SchoolName == $admin->name) {
+                  return redirect(url($admin->name.'/Staff'));
+                }
+                else{
+                    return view('School.welcome');
+                }
             }
             else{
                 return view('School.welcome');

@@ -28,7 +28,7 @@ class StaffsController extends Controller
             if(True){
                 $admin = Auth::guard('schstaff')->user();
                 return redirect(url($admin->school_name.'/Staff'));
-                
+
             }
             else{
                 return redirect()->back()->withErrors('Access denied');
@@ -40,7 +40,7 @@ class StaffsController extends Controller
 
     }
     //for the above redirect
-    //logout 
+    //logout
 	public function schoolstaffLogout(){
         //loging out for staff
         if(Auth::guard('schstaff')->check())
@@ -54,10 +54,10 @@ class StaffsController extends Controller
         {
         return redirect()->back();
         }
-    } 
+    }
 
 
-    
+
     public function index($SchoolName)
     {
         $schools = School::all();
@@ -69,16 +69,26 @@ class StaffsController extends Controller
         }
         if($count){
                 if(Auth::guard('schadmin')->check()){
+                  if ($SchoolName == (Auth::guard('schadmin')->user()->name)) {
                     return view('school.signup');
+                  }
+                  else{
+                      return view('school.welcome');
+                  }
                 }
                 elseif(Auth::guard('schstaff')->check()){
+                  if ($SchoolName == (Auth::guard('schstaff')->user()->school_name)) {
                     return view('school.staff.dashboard');
+                  }
+                  else{
+                      return view('school.staff.welcome');
+                  }
                 }
                 elseif(Auth::guest()){
                     return view('school.staff.welcome');
                 }
             }
-    
+
         else{
             echo "the school is not registered";
         }
@@ -124,15 +134,15 @@ class StaffsController extends Controller
 		$user->school_name = $scdata->name;
 		$user->school_code = $scdata->school_code;
 		$user->firstname = $first_name;
-		$user->lastname = $last_name; 
+		$user->lastname = $last_name;
 		if ($request-> hasFile('photo')){
             $filename = time() . '.' . $photo->getClientOriginalExtension();
 			Image::make($photo)->resize(500, 500) ->save(public_path('/uploads/schools/employ/'.$filename));
 			if($user){
 				$user->avatar = '/uploads/schools/employ/'.$filename;
-			} 
+			}
         }
-        $adds = Staff::all(); 
+        $adds = Staff::all();
         if ($adds->isEmpty()) {
             $user->user_id = $scdata->school_code.'-'.'1';
         } else {

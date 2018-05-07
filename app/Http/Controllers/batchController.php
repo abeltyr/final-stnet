@@ -31,16 +31,26 @@ class BatchController extends Controller
         }
         if($count){
             if(Auth::guard('schadmin')->check()){
+              if ($SchoolName == (Auth::guard('schadmin')->user()->name)) {
                 $tabs = table::all();
                 $bats = batch::all();
                 return view('school.staff.batch',['tabs'=> $tabs,'bats'=> $bats]);
+              }
+              else{
+                return redirect()->back();
+              }
             }
             elseif(Auth::guard('schstaff')->check()){
+              if ($SchoolName == (Auth::guard('schstaff')->user()->school_name)) {
                 $tabs = table::all();
                 $bats = batch::all();
                 return view('school.staff.batch',['tabs'=> $tabs,'bats'=> $bats]);
+              }
+              else{
+                  return view('school.staff.welcome');
+              }
             }
-            elseif(Auth::guest()){
+            else{
                 return view('school.staff.welcome');
             }
         }
@@ -84,7 +94,7 @@ class BatchController extends Controller
         $subjects = [];
         $value = 0;
         for ($i = 1; $i<=20; $i++){
-            if ($request['subject'.$i]) {    
+            if ($request['subject'.$i]) {
                     array_push($subjects, $request['subject'.$i]);
             }
             else{
@@ -98,14 +108,14 @@ class BatchController extends Controller
 
             }
             else if ( preg_match("/^[0]*$/", $subjects[$i])) {
-                
+
             }
             else{
                 return redirect()->back()->withErrorof("Only Alpahbetic Letter are allow as subjects name");
             }
 
-        }  
-                
+        }
+
         $coun = array_flip(array_count_values($subjects));
         $sub = sizeof($coun);
         if ($value == 0){
@@ -134,22 +144,22 @@ class BatchController extends Controller
         $batch->testno = $notest;
         $batch->no_section = $nosection;
         $batch->batch = $batch1;
-        
+
         if($subjects[0]){
             $batch->subj1 = $subjects[0];
         }
         if($subjects[1]){
             $batch->subj2 = $subjects[1];
-        }   
+        }
         if($subjects[2]){
             $batch->subj3 = $subjects[2];
-        }    
+        }
         if($subjects[3]){
             $batch->subj4 = $subjects[3];
-        }    
+        }
         if($subjects[4]){
             $batch->subj5 = $subjects[4];
-        }               
+        }
         if($subjects[5]){
             $batch->subj6 = $subjects[5];
         }
@@ -243,7 +253,7 @@ class BatchController extends Controller
     {
         //
     }
-    // create table by the user  
+    // create table by the user
 
     public function Tabledelete(Request $request, $SchoolName){
         $id = $request['see'];
@@ -251,14 +261,14 @@ class BatchController extends Controller
         Schema::dropIfExists($tabb->tablename);
         $ta = table::findOrFail($id);
         $ta->delete();
-        return redirect(url(Auth::guard('schstaff')->user()->school_name.'/staff/Batch'))->withsuccesstabledelet('Successfully Deleted Table');  
+        return redirect(url(Auth::guard('schstaff')->user()->school_name.'/staff/Batch'))->withsuccesstabledelet('Successfully Deleted Table');
     }
 
 
 
-    public function addtable(Request $request, $SchoolName){ 
+    public function addtable(Request $request, $SchoolName){
 
-        $num = 1; 
+        $num = 1;
         $id = $request['see'];
         $this->ids = $id;
         $tabb = batch::find($this->ids);
@@ -277,10 +287,10 @@ class BatchController extends Controller
                 if ( $tabname == ($viewtab->tablename)  ){
                     $count--;
                 }
-            }   
+            }
             // the if below check if the table exist by checking wheather the model table is empty
-            if ($viewtabs->isEmpty()) {                   
-                Schema::create(  $tabname, function (Blueprint $table) { 
+            if ($viewtabs->isEmpty()) {
+                Schema::create(  $tabname, function (Blueprint $table) {
                     $tabb = batch::find($this->ids);
                     $subject1 = $tabb->subj1;
                     $subject2 = $tabb->subj2;
@@ -359,7 +369,7 @@ class BatchController extends Controller
                     if($subject20 !== 'none'){
                     $table->string($subject20);
                     }
-            }); 
+            });
             $table = new table();
             $table->schoolcode = $schcode;
             $table->schoolname = $schname;
@@ -367,9 +377,9 @@ class BatchController extends Controller
             $table->save();
             //add the created table name to an already existing table called table
             }
-            else{     
+            else{
                 if($count == 1){
-                    Schema::create(  $tabname, function (Blueprint $table) { 
+                    Schema::create(  $tabname, function (Blueprint $table) {
                         $tabb = batch::find($this->ids);
                         $subject1 = $tabb->subj1;
                         $subject2 = $tabb->subj2;
@@ -448,7 +458,7 @@ class BatchController extends Controller
                         if($subject20 !== 'none'){
                         $table->string($subject20);
                         }
-                    }); 
+                    });
                     $table = new table();
                     $table->schoolcode = $schcode;
                     $table->schoolname = $schname;
@@ -461,7 +471,7 @@ class BatchController extends Controller
             }
            $num++;
             }
-            return redirect(url(Auth::guard('schstaff')->user()->school_name.'/staff/Batch'))->withsuccesstable('Successfully added Table');    
+            return redirect(url(Auth::guard('schstaff')->user()->school_name.'/staff/Batch'))->withsuccesstable('Successfully added Table');
         }
 
 }
