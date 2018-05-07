@@ -84,8 +84,8 @@ class BatchController extends Controller
         $subjects = [];
         $value = 0;
         for ($i = 1; $i<=20; $i++){
-            if ($request['subject'.$i]) {
-                array_push($subjects, $request['subject'.$i]);
+            if ($request['subject'.$i]) {    
+                    array_push($subjects, $request['subject'.$i]);
             }
             else{
                 array_push($subjects, 0);
@@ -93,6 +93,19 @@ class BatchController extends Controller
             }
 
         }
+        for ($i = 0; $i<20; $i++){
+            if ( preg_match("/^[a-zA-Z]*$/", $subjects[$i])){
+
+            }
+            else if ( preg_match("/^[0-9]*$/", $subjects[$i])) {
+                
+            }
+            else{
+                return redirect()->back()->withError("Only Alpahbetic Letter are allow as subjects name");
+            }
+
+        }  
+                
         $coun = array_flip(array_count_values($subjects));
         $sub = sizeof($coun);
         if ($value == 0){
