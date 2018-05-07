@@ -34,19 +34,19 @@
         </div> 
     @endforeach 
     @endif 
-    @if(session('Errorof'))   
-        <div class="alert " style="  padding: 20px;  background-color: #f44336; /* Red */ color: white; border-left:6px solid #6b1905;  margin-bottom: 5px;">
-            <span style="margin-left: 15px;  color: white;  font-weight: bold;  float: right;  font-size: 22px;  line-height: 20px;  cursor: pointer;"
-            onclick="this.parentElement.style.display='none';">&times;</span>
-            <p style="color: white; text-align:center;"> {{ session('Errorof') }} </p>
-        </div> 
-    @endif 
     @if(session('success'))   
     <div class="alert " style="  padding: 15px;  background-color: #44f436;  border-left:6px solid #0ca120; margin-bottom: 5px;">
         <span style="margin-left: 15px;  color: white;  font-weight: bold;  float: right;  font-size: 22px;  line-height: 20px;  cursor: pointer;"
         onclick="this.parentElement.style.display='none';">&times;</span>
         <p class="sute" > {{session('success')}} </p>
     </div> 
+    @endif 
+    @if(session('Errorof')) 
+        <div class="alert " style="  padding: 20px;  background-color: #f44336; /* Red */ color: white; border-left:6px solid #6b1905;  margin-bottom: 5px;">
+            <span style="margin-left: 15px;  color: white;  font-weight: bold;  float: right;  font-size: 22px;  line-height: 20px;  cursor: pointer;"
+            onclick="this.parentElement.style.display='none';">&times;</span>
+            <p style="color: white; text-align:center;">{{ session('Errorof') }} </p>
+        </div>  
     @endif 
 <div class="well col-md-12" style="padding:50px; background:#2f384b; border:0px;" >
 <form enctype="multipart/form-data" action="{{ url(Auth::guard('schstaff')->user()->school_name.'/staff/Batch') }}" method="post">
